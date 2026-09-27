@@ -45,3 +45,5 @@ next-env.d.ts
 /private/gallery-originals/
 /private/gallery-access.txt
 /.tmp/
+
+.vercel

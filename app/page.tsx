@@ -194,6 +194,7 @@ export default function Home() {
             <video
               ref={themeVideoRef}
               src="/Theme/video.mp4"
+              poster="/Theme/day-poster.webp"
               muted
               playsInline
               preload="auto"

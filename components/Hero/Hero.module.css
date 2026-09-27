@@ -207,3 +207,8 @@
   .footer { padding: 32px 20px; }
   .arrow { display: none; }
 }
+
+@media (max-width: 900px) and (orientation: portrait) {
+  .inner { grid-template-columns: minmax(0, 1fr); }
+  .imageColumn { display: none; }
+}

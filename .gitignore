@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Private gallery originals and local credentials must never be published.
+/public/Girlfriend/
+/private/gallery-originals/
+/private/gallery-access.txt
+/.tmp/

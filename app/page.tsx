@@ -186,7 +186,7 @@ export default function Home() {
         <a href="https://youtube.com/" target="_blank" rel="noreferrer" aria-label="YouTube" data-tooltip="YouTube"><FaYoutube /></a>
         <a href="https://www.facebook.com/halapitankkofficial" target="_blank" rel="noreferrer" aria-label="Facebook" data-tooltip="Facebook"><FaFacebook /></a>
         <a href="mailto:proilan@example.com" aria-label="Email" data-tooltip="Email"><Mail /></a>
-        <a href="/resume.pdf" download aria-label="Resume" data-tooltip="Resume"><FileText /></a>
+        <a href="/resume/Adolfo_Resume.pdf" target="_blank" rel="noopener noreferrer" aria-label="Resume (opens in a new tab)" data-tooltip="Resume"><FileText /></a>
       </aside>
       <aside className="sidebar">
         <a className="brand" href="#home" aria-label="Back to home">

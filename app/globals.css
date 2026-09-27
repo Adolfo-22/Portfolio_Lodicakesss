@@ -92,6 +92,24 @@ button {
 .icon-sidebar a::after { content: attr(data-tooltip); position: absolute; left: calc(100% + 0.65rem); top: 50%; padding: 0.35rem 0.5rem; border: 1px solid var(--border); background: var(--background); color: var(--foreground); font: 0.62rem var(--font-mono); white-space: nowrap; opacity: 0; pointer-events: none; transform: translateY(-50%) translateX(-4px); transition: opacity 160ms ease, transform 160ms ease; }
 .icon-sidebar a:hover::after, .icon-sidebar a:focus-visible::after { opacity: 1; transform: translateY(-50%) translateX(0); }
 
+/* Small circular orbits keep the icons upright and their link targets steady. */
+@keyframes sidebar-icon-orbit {
+  from { transform: rotate(0deg) translateY(-4px) rotate(0deg); }
+  to { transform: rotate(360deg) translateY(-4px) rotate(-360deg); }
+}
+@media (min-width: 901px) and (prefers-reduced-motion: no-preference) {
+  .icon-sidebar a svg { animation: sidebar-icon-orbit 5.6s linear infinite; }
+  .icon-sidebar a:nth-child(2) svg { animation-delay: -0.8s; }
+  .icon-sidebar a:nth-child(3) svg { animation-delay: -1.6s; }
+  .icon-sidebar a:nth-child(4) svg { animation-delay: -2.4s; }
+  .icon-sidebar a:nth-child(5) svg { animation-delay: -3.2s; }
+  .icon-sidebar a:nth-child(6) svg { animation-delay: -4s; }
+  .icon-sidebar a:nth-child(7) svg { animation-delay: -4.8s; }
+  .icon-sidebar:hover a svg,
+  .icon-sidebar:focus-within a svg { animation-play-state: paused; }
+}
+.icon-sidebar a:focus-visible { outline: 2px solid var(--foreground); outline-offset: 2px; border-radius: 4px; }
+
 .brand {
   display: flex;
   align-items: center;
@@ -196,6 +214,20 @@ button {
 .theme-toggle-controls svg { position: relative; width: 15px; height: 15px; color: rgba(255, 255, 255, 0.68); stroke-width: 1.8; transition: color 200ms ease; }
 .theme-toggle[aria-pressed="false"] .theme-toggle-sun,
 .theme-toggle[aria-pressed="true"] .theme-toggle-moon { color: #191919; }
+@media (min-width: 901px) {
+  .theme-toggle { overflow: visible; }
+  .theme-toggle-preview { border-radius: inherit; overflow: hidden; }
+  .theme-toggle-controls {
+    left: calc(100% + 12px);
+    top: 50%;
+    bottom: auto;
+    transform: translateY(-50%);
+    grid-template-columns: 28px;
+    grid-template-rows: repeat(2, 28px);
+    pointer-events: auto;
+  }
+  .theme-toggle[aria-pressed="true"] .theme-toggle-thumb { transform: translateY(32px); }
+}
 .responsive-header { display: contents; }
 .mobile-header-info, .mobile-menu-button, .mobile-menu { display: none; }
 

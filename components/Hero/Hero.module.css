@@ -228,3 +228,61 @@
   .inner { grid-template-columns: minmax(0, 1fr); }
   .imageColumn { display: none; }
 }
+
+.lockedPost { min-height: 420px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; padding: 40px 24px; text-align: center; background: radial-gradient(ellipse at top, #a56b6514, transparent 70%), var(--surface); border-top: 1px solid var(--border); }
+.lockedPostIcon { display: grid; place-items: center; width: 86px; height: 86px; border: 1px solid var(--border); border-radius: 50%; color: #a56b65; background: var(--background); }
+.lockedPost h3 { font-size: clamp(26px, 4vw, 40px); letter-spacing: -.05em; }
+.lockedPost p { color: var(--foreground-muted); font-size: 14px; }
+.lockedPost small { color: var(--foreground-muted); font-size: 11px; }
+.openPost { display: inline-flex; align-items: center; justify-content: center; gap: 12px; padding: 14px 24px; margin-top: 8px; background: var(--accent); color: var(--accent-contrast); border-radius: 6px; font-size: 14px; }
+.openPost:hover { background: var(--accent-strong); }
+.openPost:focus-visible { outline: 2px solid var(--foreground); outline-offset: 4px; }
+@media (max-width: 620px) { .lockedPost { min-height: 340px; padding: 32px 18px; } }
+
+.openPost { border: 0; cursor: pointer; font-family: inherit; }
+.passwordModal { position: fixed; inset: 0; margin: auto; padding: 0; width: min(420px, calc(100vw - 32px)); max-height: calc(100dvh - 32px); border: 1px solid var(--border); border-radius: 16px; background: var(--background); color: var(--foreground); text-align: left; }
+.passwordModal::backdrop { background: #0009; backdrop-filter: blur(4px); }
+.passwordPanel { position: relative; padding: 32px; }
+.passwordPanel h2 { margin: 16px 0 8px; }
+.passwordPanel p { font-size: 14px; line-height: 1.6; color: var(--foreground-muted); }
+.passwordPanel form { display: grid; gap: 12px; margin-top: 24px; }
+.passwordPanel label { font-size: 13px; }
+.passwordPanel input { width: 100%; min-width: 0; padding: 12px; border-radius: 6px; border: 1px solid var(--border); background: var(--surface); color: var(--foreground); font: inherit; font-size: 16px; }
+.passwordPanel [role="alert"] { color: #b64242; }
+.passwordPanel button:disabled { opacity: .6; cursor: wait; }
+.passwordClose { position: absolute; right: 14px; top: 14px; display: grid; place-items: center; width: 36px; height: 36px; border: 0; background: transparent; color: var(--foreground); cursor: pointer; }
+
+.experienceTitle { font-size: clamp(1.8rem, 3vw, 2.6rem); letter-spacing: -.045em; line-height: 1.15; margin-bottom: 16px; }
+.experienceIntro { color: var(--foreground-muted); line-height: 1.7; max-width: 65ch; margin-bottom: 28px; }
+.certificateList { display: grid; gap: 18px; }
+.certificateCard { display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 18px; padding: 26px; border: 1px solid var(--border); background: var(--background); border-radius: 8px; }
+.certificateNumber { color: var(--foreground-muted); font: 13px var(--font-mono); padding-top: 4px; }
+.certificateCard h3 { margin: 8px 0; font-size: clamp(1.15rem, 2vw, 1.4rem); line-height: 1.35; letter-spacing: -.025em; }
+.certificateCard p { font-size: 14px; color: var(--foreground-muted); line-height: 1.7; }
+.certificateCard .certificateIssuer { margin-bottom: 14px; color: var(--foreground); font-size: 12px; }
+.certificateCard .certificateDate { margin-top: 12px; font-size: 12px; }
+.certificateLink { display: inline-flex; align-items: center; gap: 18px; margin-top: 20px; padding: 10px 14px; border: 1px solid var(--border); border-radius: 4px; font-size: 13px; }
+.certificateLink span { color: var(--foreground-muted); font: 11px var(--font-mono); }
+.certificateLink:hover { background: var(--surface); }
+@media (max-width: 620px) { .certificateCard { grid-template-columns: 24px minmax(0, 1fr); gap: 10px; padding: 20px 16px; } }
+
+.certificateLink { background: transparent; color: var(--foreground); font-family: inherit; cursor: pointer; }
+.certificateModal { position: fixed; inset: 0; margin: auto; width: min(1000px, calc(100vw - 32px)); height: min(900px, calc(100dvh - 40px)); max-width: none; max-height: none; padding: 0; border: 1px solid var(--border); border-radius: 12px; background: var(--background); color: var(--foreground); overflow: hidden; }
+.certificateModal::backdrop { background: #000b; backdrop-filter: blur(4px); }
+.certificateModalContent { display: flex; flex-direction: column; height: 100%; min-height: 0; }
+.certificateModalHeader { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 18px; border-bottom: 1px solid var(--border); }
+.certificateModalHeader h2 { font-size: 15px; line-height: 1.4; }
+.certificateModalHeader button { flex-shrink: 0; display: grid; place-items: center; width: 40px; height: 40px; border: 1px solid var(--border); border-radius: 6px; background: var(--surface); color: var(--foreground); cursor: pointer; }
+.certificatePdf { flex: 1; width: 100%; min-height: 0; border: 0; background: var(--surface); }
+.certificateImage { flex: 1; min-height: 0; overflow: auto; background: var(--surface); text-align: center; padding: 16px; }
+.certificateImage img { display: block; width: auto; max-width: 100%; height: auto; margin: auto; }
+.certificateModalFooter { display: flex; justify-content: space-between; gap: 12px; padding: 12px 18px; border-top: 1px solid var(--border); font-size: 12px; }
+.certificateModalFooter span { color: var(--foreground-muted); }
+.certificateModalFooter a { text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 620px) { .certificateModal { width: calc(100vw - 16px); height: calc(100dvh - 24px); } .certificateModalHeader { padding: 10px 12px; } .certificateModalHeader h2 { font-size: 13px; } .certificateImage { padding: 8px; } }
+
+.privateGalleryModal { width: min(1080px, calc(100vw - 32px)); height: calc(100dvh - 40px); max-height: calc(100dvh - 40px); overscroll-behavior: contain; }
+.privateGalleryContent { text-align: left; }
+.privateGalleryHeader { position: sticky; top: 0; z-index: 2; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 20px; border-bottom: 1px solid var(--border); background: var(--background); font-size: 13px; }
+.privateGalleryHeader button { display: grid; place-items: center; width: 40px; height: 40px; border: 1px solid var(--border); border-radius: 6px; background: var(--surface); color: var(--foreground); cursor: pointer; }
+@media (max-width: 620px) { .privateGalleryModal { width: calc(100vw - 16px); height: calc(100dvh - 24px); max-height: calc(100dvh - 24px); } }

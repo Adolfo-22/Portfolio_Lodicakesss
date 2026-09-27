@@ -1,0 +1,30 @@
+.page { width: min(1120px, 100%); margin: auto; padding: 28px 32px 40px; }
+.nav, .nav a, .nav button, .albumLabel, .albumLabel span { display: flex; align-items: center; gap: 10px; }
+.nav { justify-content: space-between; font-size: 13px; }
+.nav button { border: 1px solid var(--border); padding: 10px 14px; border-radius: 24px; background: var(--background); color: var(--foreground); cursor: pointer; }
+.heading { text-align: center; padding: 76px 0 38px; }
+.eyebrow { font: 11px var(--font-mono); letter-spacing: .18em; color: var(--foreground-muted); }
+.heading h1 { font-size: clamp(64px, 12vw, 104px); letter-spacing: -.075em; line-height: 1.15; margin: 16px 0; }
+.heading h1 span { color: #a56b65; }
+.heading p, .gate p { color: var(--foreground-muted); line-height: 1.7; font-size: 15px; }
+.gate { max-width: 440px; margin: 0 auto; padding: 36px; border: 1px solid var(--border); border-radius: 20px; background: var(--background); text-align: center; box-shadow: 0 12px 40px #00000005; }
+.lock { display: grid; place-items: center; margin: 0 auto 22px; width: 64px; height: 64px; border-radius: 50%; background: #a56b6514; color: #a56b65; }
+.gate h2 { font-size: 21px; letter-spacing: -.04em; margin-bottom: 10px; }
+.gate form { display: grid; gap: 12px; margin: 28px 0 22px; text-align: left; }
+.gate label { font-size: 12px; font-weight: 600; }
+.gate input { min-width: 0; width: 100%; padding: 14px; font: inherit; font-size: 16px; background: var(--surface); border: 1px solid var(--border); color: var(--foreground); border-radius: 8px; }
+.gate form button { display: flex; justify-content: center; align-items: center; gap: 12px; padding: 14px; background: var(--foreground); color: var(--background); border: 0; border-radius: 8px; cursor: pointer; }
+.gate button:disabled { opacity: .55; cursor: wait; }
+.gate small { display: flex; justify-content: center; align-items: center; gap: 6px; color: var(--foreground-muted); font-size: 11px; }
+.gate .error { color: #af3939; margin-bottom: 18px; font-size: 13px; }
+.albumLabel { justify-content: space-between; padding: 20px 0; border-top: 1px solid var(--border); font-size: 12px; color: var(--foreground-muted); }
+.grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.photo { min-width: 0; padding: 9px; border: 1px solid var(--border); background: var(--background); color: var(--foreground-muted); border-radius: 8px; cursor: pointer; text-align: left; }
+.photo img { display: block; width: 100%; height: auto; aspect-ratio: 4/5; object-fit: cover; border-radius: 3px; }
+.photo span { display: block; font: 10px var(--font-mono); padding: 14px 4px 5px; }
+.viewer { position: fixed; inset: 0; margin: auto; max-width: 95vw; max-height: 94dvh; border: 0; padding: 0; background: transparent; overflow: visible; }
+.viewer::backdrop { background: #000e; }
+.viewer img { display: block; max-width: 95vw; max-height: 88dvh; width: auto; height: auto; object-fit: contain; }
+.close { position: absolute; right: 8px; top: 8px; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; border: 1px solid #ffffff55; background: #171719; color: white; cursor: pointer; }
+.footer { text-align: center; padding-top: 52px; color: var(--foreground-muted); font-size: 11px; }
+@media (max-width: 620px) { .page { padding: 22px 18px 32px; } .heading { padding-top: 54px; } .heading p { max-width: 270px; margin: auto; } .gate { padding: 28px 22px; } .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; } .photo { padding: 6px; } .photo span { font-size: 8px; } }

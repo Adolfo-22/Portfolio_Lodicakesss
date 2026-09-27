@@ -184,7 +184,7 @@ export default function MobileNavigation({ children, navigation, activeSection, 
           <a href="https://youtube.com/" target="_blank" rel="noreferrer" aria-label="YouTube"><FaYoutube /></a>
           <a href="https://facebook.com/" target="_blank" rel="noreferrer" aria-label="Facebook"><FaFacebook /></a>
           <a href="mailto:proilan@example.com" aria-label="Email"><Mail /></a>
-          <a href="/resume.pdf" download aria-label="Resume"><FileText /></a>
+          <a href="/resume/Adolfo_Resume.pdf" target="_blank" rel="noopener noreferrer" aria-label="Resume (opens in a new tab)"><FileText /></a>
         </nav>
       </dialog>
     </>

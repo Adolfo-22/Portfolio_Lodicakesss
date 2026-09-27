@@ -25,7 +25,7 @@ export const profile = {
   ],
   ctas: {
     primary: { label: "View My Work", href: "#projects" },
-    secondary: { label: "Download Resume", href: "/resume.pdf" },
+    secondary: { label: "View Resume", href: "/resume/Adolfo_Resume.pdf" },
   },
   avatar: "/avatar-placeholder.svg",
 } as const;
@@ -146,4 +146,32 @@ export const techStack: TechBadge[] = [
   { label: "Node.js", shortLabel: "Nd", color: "#3c873a" },
   { label: "Python", shortLabel: "Py", color: "#3776ab" },
   { label: "Git", shortLabel: "Gt", color: "#f05033" },
+];
+
+export const certifications = [
+  {
+    "title": "CCNA: Introduction to Networks",
+    "issuer": "Cisco Networking Academy · Bukidnon State University",
+    "kind": "Course completion",
+    "description": "Successfully completed Introduction to Networks, offered by Bukidnon State University through the Cisco Networking Academy program.",
+    "file": "/experience/CCNA-_Introduction_to_Networks_certificate_2301114143-student-buksu-edu-ph_0675cd06-638f-4fbf-b7c6-985a214e4b38.pdf",
+    "format": "PDF"
+  },
+  {
+    "title": "CCNA: Switching, Routing, and Wireless Essentials",
+    "issuer": "Cisco Networking Academy · Bukidnon State University",
+    "kind": "Course completion",
+    "description": "Successfully completed Switching, Routing, and Wireless Essentials, offered by Bukidnon State University through the Cisco Networking Academy program.",
+    "file": "/experience/CCNA-_Switching-_Routing-_and_Wireless_Essentials_certificate_2301114143-student-buksu-edu-ph_579d3083-016b-4e0a-b5ed-b2516624e783.pdf",
+    "format": "PDF"
+  },
+  {
+    "title": "Computer Systems Servicing NC II",
+    "issuer": "Technical Education and Skills Development Authority (TESDA)",
+    "kind": "National Certificate II",
+    "description": "Completed the competency requirements for installing and configuring computer systems, setting up computer networks and servers, and maintaining and repairing computer systems and networks.",
+    "file": "/experience/National.png",
+    "format": "Image",
+    "date": "Issued February 26, 2024 · Valid until February 25, 2029"
+  }
 ];

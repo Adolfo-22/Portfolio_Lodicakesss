@@ -1,5 +1,17 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Private photo album
+
+Open `/private`, or select **Open post** on the **Just us** post in the blog carousel. The last carousel post opens a password dialog, then displays the album inside that same modal. The album requires a password; every photo request checks the server session. Sessions expire after one hour. Anyone you share the password with can save photos they can view.
+
+Original photos live in `private/gallery-originals/`, outside `public/` and ignored by Git. Only AES-256-GCM encrypted WebP copies in `private/gallery/` are committed. Never put private originals back in `public/`.
+
+Run `npm run gallery:setup` after changing the originals. It creates optimized encrypted photos and, on first use, a random password. Find the password in the ignored `private/gallery-access.txt` file. Back up your originals and `.env.local` securely. Do not commit or share either file.
+
+For deployment, copy **GALLERY_MEDIA_KEY** and **GALLERY_PASSWORD_HASH** from `.env.local` into your hosting provider's server environment variables, then redeploy. Neither variable may use a `NEXT_PUBLIC_` prefix. Without these settings, the deployed album stays locked. Use HTTPS in production. A fresh clone needs these same settings to decrypt the committed assets; do not run setup with a new key unless you intend to replace the album.
+
+To change the password, provide `GALLERY_NEW_PASSWORD` (at least 6 characters) as an environment variable when running `npm run gallery:setup`, then update the hosting password hash and redeploy. Existing sessions become invalid. The setup script retains the media key. For removed photos, the manifest allowlist immediately prevents access; old encrypted files may be removed from `private/gallery/` before committing. The application has a basic per-server login limiter; configure a hosting/WAF rate limit for `/private/session` when deploying across multiple instances. Authorized viewers can retain downloaded images even after logout.
+
 ## Getting Started
 
 First, run the development server:

@@ -35,11 +35,14 @@ export type Strategy = {
   description: string;
 };
 
+export type BlogReaction = "like" | "love" | "celebrate";
+
 export type BlogPost = {
   id: string;
   title: string;
   date: string;
   caption: string;
+  demoReactions: Record<BlogReaction, number>;
   mainImage: { src: string; alt: string };
   thumbImages: { src: string; alt: string }[];
 };
@@ -49,6 +52,7 @@ export const blogPosts: BlogPost[] = [
     id: "capstone-defense",
     title: "Capstone 2 Defended",
     date: "November 2026 · milestone",
+    demoReactions: { like: 24, love: 18, celebrate: 12 },
     caption:
       "Our capstone, \"IoT-Powered Attendance Monitoring with Geotagging and Geolocation to Address Student Truancy,\" officially passed its final defense. Months of building, debugging, and revising the RFID, GPS, and SMS-notification pipeline came down to this panel presentation, and the system held up. Grateful to my groupmates, Estrada, Sales, and Toregossa, and to our panelists and adviser for the guidance that got us here.",
     mainImage: {
@@ -74,6 +78,7 @@ export const blogPosts: BlogPost[] = [
     id: "battle-of-the-band",
     title: "Battle of the Band Champion",
     date: "September 2026 · achievement",
+    demoReactions: { like: 31, love: 16, celebrate: 21 },
     caption:
       "A memorable night of music, teamwork, and hard work. Proud to share that our band became the Battle of the Band Champion, and I was also recognized as Best in Keyboard. This experience reminded me that preparation, collaboration, and passion can turn every performance into something meaningful.",
     mainImage: {

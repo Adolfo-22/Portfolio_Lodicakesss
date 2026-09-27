@@ -1,65 +1,36 @@
 "use client";
 
-import { startTransition, useCallback, useEffect, useRef, useState } from "react";
+import { startTransition, useEffect, useState } from "react";
 import { blogPosts, profile, strategies, techStack } from "@/data/profile";
 import Image from "next/image";
-import { MessageCircle, Send } from "lucide-react";
+import { Heart, MessageCircle, Send } from "lucide-react";
 import ProfileImage from "./ProfileImage";
-import PostReactions from "./PostReactions";
 import TechBadge from "./TechBadge";
 import styles from "./Hero.module.css";
 
-export default function Hero() {
+type HeroProps = {
+  mobileSocialOpen: boolean;
+  onMobileSocialToggle: () => void;
+};
+
+export default function Hero({ mobileSocialOpen, onMobileSocialToggle }: HeroProps) {
   const [projectOpen, setProjectOpen] = useState<"attendance" | "carenest" | null>(null);
+  const [likedPosts, setLikedPosts] = useState<Record<string, boolean>>({});
   const [postComments, setPostComments] = useState<Record<string, string[]>>({});
   const [commentDrafts, setCommentDrafts] = useState<Record<string, string>>({});
   const [viewerImage, setViewerImage] = useState<{ src: string; alt: string } | null>(null);
   const [activePost, setActivePost] = useState(0);
   const [carouselPaused, setCarouselPaused] = useState(false);
-  const blogViewportRef = useRef<HTMLDivElement>(null);
-  const activePostRef = useRef(0);
-
-  const goToPost = useCallback((index: number) => {
-    const viewport = blogViewportRef.current;
-    if (!viewport || blogPosts.length === 0) return;
-    const next = (index + blogPosts.length) % blogPosts.length;
-    viewport.scrollTo({
-      left: next * viewport.clientWidth,
-      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth",
-    });
-  }, []);
 
   useEffect(() => {
-    // Touch devices stay manual even when rotated past the mobile breakpoint.
-    const manualCarousel = window.matchMedia("(max-width: 900px), (pointer: coarse)");
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    let timer: number | undefined;
-    const updateAutoplay = () => {
-      window.clearInterval(timer);
-      if (carouselPaused || viewerImage || blogPosts.length <= 1 || manualCarousel.matches || reducedMotion.matches || document.hidden) return;
-      timer = window.setInterval(() => goToPost(activePostRef.current + 1), 2000);
-    };
-    updateAutoplay();
-    manualCarousel.addEventListener("change", updateAutoplay);
-    reducedMotion.addEventListener("change", updateAutoplay);
-    document.addEventListener("visibilitychange", updateAutoplay);
-    return () => {
-      window.clearInterval(timer);
-      manualCarousel.removeEventListener("change", updateAutoplay);
-      reducedMotion.removeEventListener("change", updateAutoplay);
-      document.removeEventListener("visibilitychange", updateAutoplay);
-    };
-  }, [carouselPaused, viewerImage, goToPost]);
+    if (carouselPaused || blogPosts.length <= 1) return;
+    const timer = window.setInterval(() => {
+      setActivePost((index) => (index + 1) % blogPosts.length);
+    }, 2000);
+    return () => window.clearInterval(timer);
+  }, [carouselPaused]);
 
-  useEffect(() => {
-    const viewport = blogViewportRef.current;
-    if (!viewport) return;
-    const observer = new ResizeObserver(() => {
-      viewport.scrollTo({ left: activePostRef.current * viewport.clientWidth, behavior: "instant" });
-    });
-    observer.observe(viewport);
-    return () => observer.disconnect();
-  }, []);
+  const goToPost = (index: number) => setActivePost((index + blogPosts.length) % blogPosts.length);
 
   useEffect(() => {
     if (!projectOpen) return;
@@ -88,16 +59,8 @@ export default function Hero() {
   }, [viewerImage]);
 
   useEffect(() => {
-    try {
-      const savedComments = window.localStorage.getItem("portfolio-post-comments");
-      const parsed: unknown = savedComments ? JSON.parse(savedComments) : null;
-      if (parsed && typeof parsed === "object" && !Array.isArray(parsed)) {
-        const comments = Object.fromEntries(Object.entries(parsed).filter(([, value]) => Array.isArray(value) && value.every((comment) => typeof comment === "string")));
-        startTransition(() => setPostComments(comments));
-      }
-    } catch {
-      // The blog remains interactive when local storage is unavailable.
-    }
+    const savedComments = window.localStorage.getItem("portfolio-post-comments");
+    if (savedComments) startTransition(() => setPostComments(JSON.parse(savedComments)));
   }, []);
 
   const submitComment = (postId: string) => (event: React.FormEvent<HTMLFormElement>) => {
@@ -106,16 +69,13 @@ export default function Hero() {
     if (!trimmedComment) return;
     const nextComments = { ...postComments, [postId]: [...(postComments[postId] ?? []), trimmedComment] };
     setPostComments(nextComments);
-    try {
-      window.localStorage.setItem("portfolio-post-comments", JSON.stringify(nextComments));
-    } catch {
-      // Keep comments available for the current visit if saving is blocked.
-    }
+    window.localStorage.setItem("portfolio-post-comments", JSON.stringify(nextComments));
     setCommentDrafts((current) => ({ ...current, [postId]: "" }));
   };
 
   return (
     <div className={styles.pageContent}>
+      <div className={styles.mobileBar}><button type="button" className="mobile-brand-button" onClick={onMobileSocialToggle} aria-label="Toggle social links" aria-expanded={mobileSocialOpen}><span className="brand-mark" aria-hidden="true">&lt;/&gt;</span></button><b>proilan adolfo</b><span>⌘ K</span></div>
       <section id="home" className={styles.hero} aria-label="Introduction">
         <div className={styles.inner}>
           <div className={styles.imageColumn}><ProfileImage src={profile.avatar} name={profile.name} /></div>
@@ -132,7 +92,6 @@ export default function Hero() {
       {projectOpen && <div className={styles.modalBackdrop} role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) setProjectOpen(null); }}><section className={styles.modal} role="dialog" aria-modal="true" aria-labelledby="project-modal-title"><button type="button" className={styles.modalClose} onClick={() => setProjectOpen(null)} aria-label="Close project details">×</button>{projectOpen === "attendance" ? <><span className={styles.date}>project 01 · capstone system</span><h2 id="project-modal-title">IoT-powered attendance monitoring with geotagging and geolocation</h2><p>The system automates and improves student attendance monitoring through RFID scanning, GPS/geolocation validation, and an IoT-based setup that records attendance and timestamps in real time.</p><p>It also sends SMS notifications to parents or guardians when students enter or leave the school premises, while authorized users can monitor attendance and student location through the system.</p><div className={styles.modalGrid}><div><span className={styles.modalLabel}>short version for defense</span><p>Our capstone uses RFID, GPS/geolocation, and SMS notifications for reliable real-time attendance monitoring and better communication between schools and parents.</p></div><div><span className={styles.modalLabel}>system stack</span><div className={styles.projectTags}><span>Flutter</span><span>React.js</span><span>Node.js</span><span>MongoDB</span><span>Raspberry Pi</span></div></div></div></> : <><span className={styles.date}>project 02 · maternal care platform</span><h2 id="project-modal-title">CareNest</h2><p>CareNest is a multi-tenant digital platform designed to modernize and streamline the operations of lying-in clinics. It enables efficient management of prenatal care, appointments, delivery records, and maternal health data through a centralized yet secure system.</p><p>A lying-in clinic provides prenatal care, childbirth assistance, and postnatal care. CareNest replaces manual logbooks and scattered social media messaging with organized digital workflows, reducing data loss, scheduling conflicts, and gaps in patient monitoring.</p><div className={styles.modalGrid}><div><span className={styles.modalLabel}>system purpose</span><p>Multiple clinics can operate independently while managing their own patients, schedules, records, and maternal healthcare processes in one secure platform.</p></div><div><span className={styles.modalLabel}>system stack</span><div className={styles.projectTags}><span>PHP</span><span>Laravel</span><span>Multi-tenant</span></div></div></div></>}</section></div>}
       <section id="writing" className={styles.section}>
         <div className={styles.sectionHead}><span>02 — blog</span><span>personal updates</span></div>
-        <div className={styles.swipeHint}><span>↔ Swipe to browse</span><span>{activePost + 1} / {blogPosts.length}</span></div>
         <div
           className={styles.blogCarousel}
           role="region"
@@ -141,25 +100,16 @@ export default function Hero() {
           onMouseEnter={() => setCarouselPaused(true)}
           onMouseLeave={() => setCarouselPaused(false)}
           onFocus={() => setCarouselPaused(true)}
-          onBlur={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) setCarouselPaused(false); }}
+          onBlur={() => setCarouselPaused(false)}
         >
-          <div
-            ref={blogViewportRef}
-            className={styles.blogViewport}
-            onScroll={(event) => {
-              const viewport = event.currentTarget;
-              if (!viewport.clientWidth) return;
-              const next = Math.max(0, Math.min(blogPosts.length - 1, Math.round(viewport.scrollLeft / viewport.clientWidth)));
-              activePostRef.current = next;
-              setActivePost(next);
-            }}
-          >
-            <div className={styles.blogTrack}>
+          <div className={styles.blogViewport}>
+            <div className={styles.blogTrack} style={{ transform: `translateX(-${activePost * 100}%)` }}>
               {blogPosts.map((post, slideIndex) => {
+                const liked = likedPosts[post.id] ?? false;
                 const comments = postComments[post.id] ?? [];
                 return (
-                  <div className={styles.blogSlide} key={post.id} role="group" aria-roledescription="slide" aria-label={`${slideIndex + 1} of ${blogPosts.length}`} aria-hidden={slideIndex !== activePost} inert={slideIndex !== activePost}>
-                    <article className={styles.blogPost}><header className={styles.postHeader}><div className={styles.postAvatar}>PA</div><div><h2>{post.title}</h2><span className={styles.date}>{post.date}</span></div><span className={styles.postMenu}>•••</span></header><p className={styles.postCaption}>{post.caption}</p><div className={styles.postGallery}><button type="button" className={styles.galleryMain} onClick={() => setViewerImage(post.mainImage)} aria-label={`View ${post.mainImage.alt}`}><Image src={post.mainImage.src} alt={post.mainImage.alt} fill sizes="(max-width: 620px) 100vw, 66vw" /></button><div className={styles.gallerySide}>{post.thumbImages.map((thumb) => <button type="button" className={styles.galleryThumb} key={thumb.src} onClick={() => setViewerImage(thumb)} aria-label={`View ${thumb.alt}`}><Image src={thumb.src} alt={thumb.alt} fill sizes="(max-width: 620px) 50vw, 33vw" /></button>)}</div></div><PostReactions postId={post.id} counts={post.demoReactions} commentCount={comments.length} /><div className={styles.postActions}><button type="button" onClick={() => document.getElementById(`comment-input-${post.id}`)?.focus()}><MessageCircle /> Comment</button><button type="button"><Send /> Share</button></div><div className={styles.comments}>{comments.map((item, index) => <p key={`${item}-${index}`}><strong>Visitor</strong>{item}</p>)}</div><form className={styles.commentForm} onSubmit={submitComment(post.id)}><input id={`comment-input-${post.id}`} value={commentDrafts[post.id] ?? ""} onChange={(event) => setCommentDrafts((current) => ({ ...current, [post.id]: event.target.value }))} placeholder="Write a comment..." aria-label="Write a comment" maxLength={240} /><button type="submit" aria-label="Post comment"><Send /></button></form></article>
+                  <div className={styles.blogSlide} key={post.id} role="group" aria-roledescription="slide" aria-label={`${slideIndex + 1} of ${blogPosts.length}`} aria-hidden={slideIndex !== activePost}>
+                    <article className={styles.blogPost}><header className={styles.postHeader}><div className={styles.postAvatar}>PA</div><div><h2>{post.title}</h2><span className={styles.date}>{post.date}</span></div><span className={styles.postMenu}>•••</span></header><p className={styles.postCaption}>{post.caption}</p><div className={styles.postGallery}><button type="button" className={styles.galleryMain} onClick={() => setViewerImage(post.mainImage)} aria-label={`View ${post.mainImage.alt}`}><Image src={post.mainImage.src} alt={post.mainImage.alt} fill sizes="(max-width: 620px) 100vw, 66vw" /></button><div className={styles.gallerySide}>{post.thumbImages.map((thumb) => <button type="button" className={styles.galleryThumb} key={thumb.src} onClick={() => setViewerImage(thumb)} aria-label={`View ${thumb.alt}`}><Image src={thumb.src} alt={thumb.alt} fill sizes="(max-width: 620px) 50vw, 33vw" /></button>)}</div></div><div className={styles.postMeta}><span>{liked ? "❤️" : "♡"} {liked ? 1 : 0}</span><span>{comments.length} comments</span></div><div className={styles.postActions}><button type="button" className={liked ? styles.liked : ""} onClick={() => setLikedPosts((current) => ({ ...current, [post.id]: !current[post.id] }))}><Heart /> {liked ? "Liked" : "Like"}</button><button type="button" onClick={() => document.getElementById(`comment-input-${post.id}`)?.focus()}><MessageCircle /> Comment</button><button type="button"><Send /> Share</button></div><div className={styles.comments}>{comments.map((item, index) => <p key={`${item}-${index}`}><strong>Visitor</strong>{item}</p>)}</div><form className={styles.commentForm} onSubmit={submitComment(post.id)}><input id={`comment-input-${post.id}`} value={commentDrafts[post.id] ?? ""} onChange={(event) => setCommentDrafts((current) => ({ ...current, [post.id]: event.target.value }))} placeholder="Write a comment..." aria-label="Write a comment" maxLength={240} /><button type="submit" aria-label="Post comment"><Send /></button></form></article>
                   </div>
                 );
               })}

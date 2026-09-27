@@ -1,0 +1,226 @@
+[
+  {
+    "selector": "icon-sidebar",
+    "rect": [
+      0,
+      0,
+      48,
+      1000
+    ],
+    "font": "16px Geist, \"Geist Fallback\", Arial, Helvetica, sans-serif",
+    "padding": "21.6px 0px",
+    "margin": "0px",
+    "color": "rgb(23, 23, 25)",
+    "background": "color(srgb 1 1 1 / 0.96) none repeat scroll 0% 0% / auto padding-box border-box"
+  },
+  {
+    "selector": "sidebar",
+    "rect": [
+      48,
+      0,
+      198,
+      1000
+    ],
+    "font": "16px Geist, \"Geist Fallback\", Arial, Helvetica, sans-serif",
+    "padding": "24px 20px",
+    "margin": "0px",
+    "color": "rgb(23, 23, 25)",
+    "background": "color(srgb 1 1 1 / 0.98) none repeat scroll 0% 0% / auto padding-box border-box"
+  },
+  {
+    "selector": "theme-toggle",
+    "rect": [
+      12,
+      824,
+      164,
+      164
+    ],
+    "font": "16px Geist, \"Geist Fallback\", Arial, Helvetica, sans-serif",
+    "padding": "0px",
+    "margin": "0px",
+    "color": "rgb(23, 23, 25)",
+    "background": "rgb(244, 244, 242) none repeat scroll 0% 0% / auto padding-box border-box"
+  },
+  {
+    "selector": "home",
+    "rect": [
+      246,
+      0,
+      1674,
+      674.203125
+    ],
+    "font": "16px Geist, \"Geist Fallback\", Arial, Helvetica, sans-serif",
+    "padding": "120px 128px 32px",
+    "margin": "0px",
+    "color": "rgb(23, 23, 25)",
+    "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box"
+  },
+  {
+    "selector": "ProfileImage-module__ghc34q__image",
+    "rect": [
+      552.171875,
+      176.3125,
+      330,
+      369.59375
+    ],
+    "font": "16px Geist, \"Geist Fallback\", Arial, Helvetica, sans-serif",
+    "padding": "0px",
+    "margin": "0px",
+    "color": "rgb(23, 23, 25)",
+    "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box"
+  },
+  {
+    "selector": "Hero-module__PgAKtG__kicker",
+    "rect": [
+      965.34375,
+      120,
+      201.9375,
+      14
+    ],
+    "font": "10.88px \"Geist Mono\", \"Geist Mono Fallback\", \"Courier New\", monospace",
+    "padding": "0px",
+    "margin": "0px",
+    "color": "rgb(98, 98, 103)",
+    "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box"
+  },
+  {
+    "selector": "Hero-module__PgAKtG__heading",
+    "rect": [
+      965.34375,
+      154.796875,
+      371.578125,
+      216.8125
+    ],
+    "font": "800 123.2px / 108.416px Geist, \"Geist Fallback\", Arial, Helvetica, sans-serif",
+    "padding": "0px",
+    "margin": "4.8px 0px 8px",
+    "color": "rgb(23, 23, 25)",
+    "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box"
+  },
+  {
+    "selector": "Hero-module__PgAKtG__lede",
+    "rect": [
+      965.34375,
+      418,
+      667.65625,
+      62.59375
+    ],
+    "font": "21.6px / 31.32px Geist, \"Geist Fallback\", Arial, Helvetica, sans-serif",
+    "padding": "0px",
+    "margin": "22.4px 0px 0px",
+    "color": "rgb(23, 23, 25)",
+    "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box"
+  },
+  {
+    "selector": "Hero-module__PgAKtG__bio",
+    "rect": [
+      965.34375,
+      496.59375,
+      657.6875,
+      76.78125
+    ],
+    "font": "16px / 25.6px Geist, \"Geist Fallback\", Arial, Helvetica, sans-serif",
+    "padding": "0px",
+    "margin": "0px",
+    "color": "rgb(98, 98, 103)",
+    "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box"
+  },
+  {
+    "selector": "Hero-module__PgAKtG__primaryBtn",
+    "rect": [
+      965.34375,
+      602.171875,
+      119,
+      40.03125
+    ],
+    "font": "11.2px \"Geist Mono\", \"Geist Mono Fallback\", \"Courier New\", monospace",
+    "padding": "11.52px 16px",
+    "margin": "0px",
+    "color": "rgb(255, 255, 255)",
+    "background": "rgb(23, 23, 25) none repeat scroll 0% 0% / auto padding-box border-box"
+  },
+  {
+    "selector": "Hero-module__PgAKtG__secondaryBtn",
+    "rect": [
+      1095.53125,
+      602.171875,
+      137.703125,
+      40.03125
+    ],
+    "font": "11.2px \"Geist Mono\", \"Geist Mono Fallback\", \"Courier New\", monospace",
+    "padding": "11.52px 16px",
+    "margin": "0px",
+    "color": "rgb(23, 23, 25)",
+    "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box"
+  },
+  {
+    "selector": "projects",
+    "rect": [
+      533,
+      2534.71875,
+      1100,
+      606.734375
+    ],
+    "font": "16px Geist, \"Geist Fallback\", Arial, Helvetica, sans-serif",
+    "padding": "32px 128px",
+    "margin": "0px 287px",
+    "color": "rgb(23, 23, 25)",
+    "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box"
+  },
+  {
+    "selector": "writing",
+    "rect": [
+      533,
+      1718.015625,
+      1100,
+      816.703125
+    ],
+    "font": "16px Geist, \"Geist Fallback\", Arial, Helvetica, sans-serif",
+    "padding": "32px 128px",
+    "margin": "96px 287px 0px",
+    "color": "rgb(23, 23, 25)",
+    "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box"
+  },
+  {
+    "selector": "about",
+    "rect": [
+      533,
+      674.203125,
+      1100,
+      947.8125
+    ],
+    "font": "16px Geist, \"Geist Fallback\", Arial, Helvetica, sans-serif",
+    "padding": "32px 128px",
+    "margin": "0px 287px",
+    "color": "rgb(23, 23, 25)",
+    "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box"
+  },
+  {
+    "selector": "stack",
+    "rect": [
+      544.84375,
+      3141.453125,
+      1076.3125,
+      140.96875
+    ],
+    "font": "16px Geist, \"Geist Fallback\", Arial, Helvetica, sans-serif",
+    "padding": "32px 128px",
+    "margin": "0px 298.844px",
+    "color": "rgb(23, 23, 25)",
+    "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box"
+  },
+  {
+    "selector": "contact",
+    "rect": [
+      694.4375,
+      3314.421875,
+      777.125,
+      184
+    ],
+    "font": "16px Geist, \"Geist Fallback\", Arial, Helvetica, sans-serif",
+    "padding": "64px 128px",
+    "margin": "32px 448.438px 0px",
+    "color": "rgb(23, 23, 25)",
+    "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box"
+  }
+]

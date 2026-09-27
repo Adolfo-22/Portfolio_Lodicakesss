@@ -1,0 +1,34 @@
+[
+  {
+    "scenario": "original preview, video unavailable",
+    "coloredPixelRatio": 0
+  },
+  {
+    "scenario": "desktop, video unavailable",
+    "coloredPixelRatio": 0.07133058984910837
+  },
+  {
+    "scenario": "mobile, video unavailable",
+    "coloredPixelRatio": 0.07349143361048123
+  },
+  {
+    "scenario": "mobile-reduced-motion, video unavailable",
+    "coloredPixelRatio": 0.07349143361048123
+  },
+  {
+    "scenario": "mobile-no-javascript, video unavailable",
+    "coloredPixelRatio": 0.010456034265558075
+  },
+  {
+    "scenario": "desktop, normal media",
+    "result": "initial preview, light to dark to light passed"
+  },
+  {
+    "scenario": "mobile, normal media",
+    "result": "initial preview, light to dark to light passed"
+  },
+  {
+    "scenario": "mobile-reduced-motion, normal media",
+    "result": "initial preview, light to dark to light passed"
+  }
+]

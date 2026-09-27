@@ -1,0 +1,268 @@
+{
+  "report": [
+    {
+      "width": 320,
+      "layout": {
+        "width": 320,
+        "documentWidth": 320,
+        "offenders": [],
+        "header": {
+          "x": 0,
+          "y": 0,
+          "width": 320,
+          "height": 124
+        },
+        "image": {
+          "x": 56,
+          "y": 160,
+          "width": 208,
+          "height": 232.953125
+        },
+        "heading": {
+          "x": 20,
+          "y": 506.875,
+          "width": 212.328125,
+          "height": 126.71875
+        }
+      },
+      "navigation": "6 anchors, close, Escape, backdrop, focus trap, scroll restoration passed",
+      "carousel": "next, previous, direct selection passed",
+      "theme": "light/dark/light passed"
+    },
+    {
+      "width": 375,
+      "layout": {
+        "width": 375,
+        "documentWidth": 375,
+        "offenders": [],
+        "header": {
+          "x": 0,
+          "y": 0,
+          "width": 375,
+          "height": 124
+        },
+        "image": {
+          "x": 83.5,
+          "y": 160,
+          "width": 208,
+          "height": 232.953125
+        },
+        "heading": {
+          "x": 20,
+          "y": 506.875,
+          "width": 248.828125,
+          "height": 148.5
+        }
+      },
+      "navigation": "6 anchors, close, Escape, backdrop, focus trap, scroll restoration passed",
+      "carousel": "next, previous, direct selection passed",
+      "theme": "light/dark/light passed"
+    },
+    {
+      "width": 390,
+      "layout": {
+        "width": 390,
+        "documentWidth": 390,
+        "offenders": [],
+        "header": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 124
+        },
+        "image": {
+          "x": 89.703125,
+          "y": 160,
+          "width": 210.59375,
+          "height": 235.859375
+        },
+        "heading": {
+          "x": 20,
+          "y": 509.78125,
+          "width": 258.78125,
+          "height": 154.40625
+        }
+      },
+      "navigation": "6 anchors, close, Escape, backdrop, focus trap, scroll restoration passed",
+      "carousel": "next, previous, direct selection passed",
+      "theme": "light/dark/light passed"
+    },
+    {
+      "width": 430,
+      "layout": {
+        "width": 430,
+        "documentWidth": 430,
+        "offenders": [],
+        "header": {
+          "x": 0,
+          "y": 0,
+          "width": 430,
+          "height": 124
+        },
+        "image": {
+          "x": 98.90625,
+          "y": 160,
+          "width": 232.1875,
+          "height": 260.046875
+        },
+        "heading": {
+          "x": 20,
+          "y": 533.96875,
+          "width": 285.328125,
+          "height": 170.25
+        }
+      },
+      "navigation": "6 anchors, close, Escape, backdrop, focus trap, scroll restoration passed",
+      "carousel": "next, previous, direct selection passed",
+      "theme": "light/dark/light passed"
+    },
+    {
+      "width": 480,
+      "layout": {
+        "width": 480,
+        "documentWidth": 480,
+        "offenders": [],
+        "header": {
+          "x": 0,
+          "y": 0,
+          "width": 480,
+          "height": 124
+        },
+        "image": {
+          "x": 110.40625,
+          "y": 160,
+          "width": 259.1875,
+          "height": 290.28125
+        },
+        "heading": {
+          "x": 20,
+          "y": 564.203125,
+          "width": 318.5,
+          "height": 190.0625
+        }
+      },
+      "navigation": "6 anchors, close, Escape, backdrop, focus trap, scroll restoration passed",
+      "carousel": "next, previous, direct selection passed",
+      "theme": "light/dark/light passed"
+    },
+    {
+      "width": 620,
+      "layout": {
+        "width": 620,
+        "documentWidth": 620,
+        "offenders": [],
+        "header": {
+          "x": 0,
+          "y": 0,
+          "width": 620,
+          "height": 124
+        },
+        "image": {
+          "x": 170,
+          "y": 160,
+          "width": 280,
+          "height": 313.59375
+        },
+        "heading": {
+          "x": 70,
+          "y": 587.515625,
+          "width": 337.796875,
+          "height": 201.59375
+        }
+      },
+      "navigation": "6 anchors, close, Escape, backdrop, focus trap, scroll restoration passed",
+      "carousel": "next, previous, direct selection passed",
+      "theme": "light/dark/light passed"
+    },
+    {
+      "width": 621,
+      "layout": {
+        "width": 621,
+        "documentWidth": 621,
+        "offenders": [],
+        "header": {
+          "x": 0,
+          "y": 0,
+          "width": 621,
+          "height": 124
+        },
+        "image": {
+          "x": 32,
+          "y": 262.796875,
+          "width": 235.859375,
+          "height": 264.15625
+        },
+        "heading": {
+          "x": 300.6875,
+          "y": 205.921875,
+          "width": 177.921875,
+          "height": 103.8125
+        }
+      },
+      "navigation": "6 anchors, close, Escape, backdrop, focus trap, scroll restoration passed",
+      "carousel": "next, previous, direct selection passed",
+      "theme": "light/dark/light passed"
+    },
+    {
+      "width": 768,
+      "layout": {
+        "width": 768,
+        "documentWidth": 768,
+        "offenders": [],
+        "header": {
+          "x": 0,
+          "y": 0,
+          "width": 768,
+          "height": 124
+        },
+        "image": {
+          "x": 42.34375,
+          "y": 212.09375,
+          "width": 280,
+          "height": 313.59375
+        },
+        "heading": {
+          "x": 371.40625,
+          "y": 205.921875,
+          "width": 220.0625,
+          "height": 128.375
+        }
+      },
+      "navigation": "6 anchors, close, Escape, backdrop, focus trap, scroll restoration passed",
+      "carousel": "next, previous, direct selection passed",
+      "theme": "light/dark/light passed"
+    },
+    {
+      "width": 900,
+      "layout": {
+        "width": 900,
+        "documentWidth": 900,
+        "offenders": [],
+        "header": {
+          "x": 0,
+          "y": 0,
+          "width": 900,
+          "height": 124
+        },
+        "image": {
+          "x": 80.09375,
+          "y": 223.140625,
+          "width": 280,
+          "height": 313.59375
+        },
+        "heading": {
+          "x": 436.203125,
+          "y": 205.921875,
+          "width": 257.875,
+          "height": 150.46875
+        }
+      },
+      "navigation": "6 anchors, close, Escape, backdrop, focus trap, scroll restoration passed",
+      "carousel": "next, previous, direct selection passed",
+      "theme": "light/dark/light passed"
+    }
+  ],
+  "errors": [],
+  "resize": "passed",
+  "animations": "passed"
+}

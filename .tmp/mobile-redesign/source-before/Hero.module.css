@@ -16,6 +16,7 @@
 :global(#stack) .sectionHead > span:first-child::after { content: "05 — education"; font-size: 0.68rem; }
 :global(#stack) .sectionHead > span:last-child { font-size: 0; }
 :global(#stack) .sectionHead > span:last-child::after { content: "academic background"; font-size: 0.68rem; }
+.mobileBar { display: none; }
 .hero { width: 100%; padding: clamp(3.5rem, 8vw, 7.5rem) clamp(1.25rem, 7vw, 8rem) 2rem; animation: appear 700ms ease both; }
 .inner { max-width: 1100px; margin-inline: auto; display: grid; grid-template-columns: minmax(250px, 0.8fr) minmax(0, 1.45fr); gap: clamp(2rem, 4vw, 4rem); align-items: center; }
 .content { display: flex; flex-direction: column; align-items: flex-start; gap: 1rem; text-align: left; }
@@ -61,15 +62,10 @@
 .feature h2, .note h2 { font-size: clamp(1.1rem, 2vw, 1.5rem); line-height: 1.15; text-transform: lowercase; }
 .feature p, .note p { margin-top: 0.55rem; color: var(--foreground-muted); font-size: 0.9rem; line-height: 1.55; }
 .blogCarousel { position: relative; max-width: 100%; }
-.blogViewport { overflow-x: auto; max-width: 100%; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; scrollbar-width: none; }
-.blogViewport::-webkit-scrollbar { display: none; }
-.blogTrack { display: flex; width: 100%; }
-.blogSlide { flex: 0 0 100%; min-width: 0; max-width: 100%; box-sizing: border-box; padding-inline: 0.25rem; scroll-snap-align: start; scroll-snap-stop: always; }
+.blogViewport { overflow: hidden; max-width: 100%; }
+.blogTrack { display: flex; width: 100%; transition: transform 550ms cubic-bezier(0.22, 1, 0.36, 1); }
+.blogSlide { flex: 0 0 100%; min-width: 0; max-width: 100%; box-sizing: border-box; padding-inline: 0.25rem; }
 .blogSlide[aria-hidden="true"] { pointer-events: none; }
-.swipeHint { display: none; }
-@media (max-width: 900px), (pointer: coarse) {
-  .swipeHint { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: -4px 0 16px; color: var(--foreground-muted); font: 0.65rem var(--font-mono); }
-}
 .blogPost { max-width: 760px; margin-inline: auto; border: 1px solid var(--border); background: color-mix(in srgb, var(--background) 92%, var(--surface)); }
 .carouselArrow { position: absolute; top: 50%; z-index: 1; display: grid; place-items: center; width: 2.6rem; height: 2.6rem; border: 1px solid var(--border); border-radius: 50%; background: var(--background); color: var(--foreground); cursor: pointer; transform: translateY(-50%); transition: background 180ms ease, color 180ms ease; }
 .carouselArrow:hover { color: var(--accent-contrast); background: var(--accent); }
@@ -107,21 +103,10 @@
 .galleryThumb { position: relative; min-height: 0; overflow: hidden; }
 .galleryMain, .galleryThumb { padding: 0; border: 0; cursor: zoom-in; text-align: left; }
 .blogPost:hover .galleryMain img, .blogPost:hover .gallerySide img { transform: scale(1.025); filter: saturate(1.08); }
-.postMeta { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; padding: 0.8rem 1rem; color: var(--foreground-muted); font: 0.68rem var(--font-mono); }
-.reactionSummary { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 6px; }
-.reactionSummary > span:first-child { letter-spacing: -0.25em; padding-right: 4px; font-size: 0.9rem; }
-.reactionBar { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; padding: 0 12px 12px; }
-.reactionButton { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 5px; min-width: 0; min-height: 44px; padding: 8px 4px; border: 1px solid var(--border); border-radius: 8px; background: var(--background); color: var(--foreground-muted); font: 0.65rem var(--font-sans); cursor: pointer; transition: background 160ms ease, border-color 160ms ease, color 160ms ease; }
-.reactionButton svg { width: 15px; height: 15px; flex-shrink: 0; }
-.reactionButton b { font: 600 0.65rem var(--font-mono); }
-.reactionButton:hover { color: var(--foreground); border-color: var(--foreground-muted); background: var(--surface); }
-.reactionSelected { color: var(--foreground); border-color: var(--foreground); background: var(--surface); }
-.reactionSelected[data-reaction="like"] svg { color: #4285d4; fill: color-mix(in srgb, #4285d4 15%, transparent); }
-.reactionSelected[data-reaction="love"] svg { color: #e03e5b; fill: #e03e5b; }
-.reactionSelected[data-reaction="celebrate"] svg { color: #bd8534; }
-.postActions { display: grid; grid-template-columns: repeat(2, 1fr); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.postMeta { display: flex; justify-content: space-between; padding: 0.8rem 1rem; color: var(--foreground-muted); font: 0.68rem var(--font-mono); }
+.postActions { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
 .postActions button { display: inline-flex; align-items: center; justify-content: center; gap: 0.45rem; padding: 0.75rem 0.5rem; border: 0; background: transparent; color: var(--foreground-muted); cursor: pointer; font: 0.68rem var(--font-mono); }
-.postActions button:hover { color: var(--foreground); background: var(--surface); }
+.postActions button:hover, .postActions .liked { color: #e03e5b; background: var(--surface); }
 .postActions svg, .commentForm svg { width: 0.9rem; height: 0.9rem; }
 .comments { display: grid; gap: 0.55rem; padding: 0.8rem 1rem 0; }
 .comments p { margin: 0; padding: 0.55rem 0.7rem; border-radius: 0 8px 8px 8px; background: var(--surface); color: var(--foreground-muted); font-size: 0.8rem; }
@@ -157,74 +142,29 @@
 }
 @media (max-width: 900px) {
   .pageContent { margin-left: 0; }
-  .hero { padding: 48px 24px; }
-  .inner { max-width: 820px; grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr); gap: clamp(24px, 4vw, 36px); }
-  .imageColumn { min-width: 0; padding: 0; }
-  .content { min-width: 0; gap: 16px; }
-  .kicker { font-size: 0.7rem; line-height: 1.6; }
-  .heading { margin: 0; font-size: clamp(3.6rem, 9.5vw, 5.5rem); }
-  .lede { margin-top: 8px; font-size: 1.1rem; line-height: 1.5; }
-  .bio { font-size: 0.95rem; line-height: 1.65; }
-  .ctas { gap: 10px; margin-top: 8px; }
-  .primaryBtn, .secondaryBtn { min-height: 44px; justify-content: center; padding-inline: 16px; font-size: 0.72rem; }
-  .section, .stackSection { width: 100%; padding: 40px 24px; scroll-margin-top: calc(var(--mobile-header-clearance) + 20px); }
-  .sectionHead { flex-wrap: wrap; gap: 8px 16px; line-height: 1.6; }
-  .feature, .note { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 20px; }
-  .feature:hover, .note:hover { padding-inline: 0; }
-  .projectInfo { min-width: 0; }
-  .strategyGrid { list-style: none; }
-  .badges { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; }
-  .footer { width: 100%; margin-top: 0; padding: 40px 24px; display: grid; gap: 16px; }
-  .footer a { overflow-wrap: anywhere; }
-  .modal { max-height: 85dvh; box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.18); }
-  .modalClose { display: grid; place-items: center; width: 44px; height: 44px; top: 8px; right: 8px; }
-  .modal > .date { display: block; padding-right: 36px; }
-  .postAvatar { flex-shrink: 0; }
-  .postHeader > div { min-width: 0; }
-  .postHeader h2 { overflow-wrap: anywhere; }
-  .postActions button { min-height: 44px; }
-  .commentForm input { min-height: 44px; font-size: 1rem; }
-  .commentForm button { width: 44px; flex-shrink: 0; }
-  .comments p { overflow-wrap: anywhere; }
-  :global(#writing) { margin-top: 0; }
+  .mobileBar { display: flex; position: relative; align-items: center; justify-content: space-between; padding: 0.8rem 1.25rem; border-bottom: 1px solid var(--border); font-family: var(--font-mono); font-size: 0.7rem; }
+  .hero { padding: 3rem 1rem 1.5rem; }
+  .inner { grid-template-columns: minmax(220px, 0.75fr) minmax(0, 1fr); gap: clamp(1.5rem, 5vw, 3rem); }
+  .imageColumn { padding: 0; }
+  .heading { font-size: clamp(3.8rem, 11vw, 6rem); }
+  .section, .stackSection { padding-inline: 1rem; }
+  .footer { margin-top: 1rem; padding-inline: 1rem; display: grid; gap: 1rem; }
 }
 @media (max-width: 620px) {
-  .hero { padding: calc(var(--mobile-header-clearance) - var(--mobile-header-height) + 36px) 20px 40px; }
-  .inner { max-width: 480px; grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  .inner { grid-template-columns: 1fr; gap: 2rem; }
   .imageColumn { order: -1; }
-  .heading { font-size: clamp(4rem, 22vw, 7rem); line-height: 0.9; }
-  .lede { margin-top: 4px; font-size: 1.125rem; }
-  .ctas { width: 100%; }
-  .primaryBtn, .secondaryBtn { flex: 1 1 auto; }
-  .section, .stackSection { padding: 32px 20px; }
-  .feature, .note { grid-template-columns: minmax(0, 1fr); gap: 16px; padding-block: 20px; }
-  .feature + .feature { border-top: 1px solid var(--border); }
-  .aboutText { font-size: clamp(1.5rem, 5.8vw, 2rem); line-height: 1.2; }
+  .heading { font-size: clamp(3.8rem, 19vw, 7rem); }
+  .lede { margin-top: 0.8rem; }
+  .feature, .note { grid-template-columns: 1fr; gap: 0.6rem; }
   .strategyGrid { grid-template-columns: 1fr; }
-  .strategyCard { padding: 20px; }
   .projectImage { aspect-ratio: 1.55; }
   .modalGrid { grid-template-columns: 1fr; gap: 1rem; }
   .blogPost { margin-inline: 0; }
-  .postHeader { gap: 8px; padding: 12px; }
-  .postHeader h2 { font-size: 0.9rem; }
-  .postHeader .date { font-size: 0.6rem; }
-  .postMenu { letter-spacing: 0; }
   .postGallery { grid-template-columns: 1fr; }
   .galleryMain { min-height: 280px; }
   .gallerySide { min-height: 300px; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; }
   .galleryThumb { min-height: 145px; }
-  .postActions { gap: 0; padding-inline: 4px; }
-  .postActions button { padding-inline: 4px; font-size: 0.75rem; }
-  .carouselDots { gap: 4px; }
-  .carouselDot { position: relative; width: 44px; height: 44px; border: 0; background: transparent; }
-  .carouselDot::before { content: ""; position: absolute; inset: 16px; border: 1px solid var(--foreground-muted); border-radius: 50%; }
-  .carouselDotActive { transform: none; background: transparent; }
-  .carouselDotActive::before { border-color: var(--foreground); background: var(--foreground); }
-  .footer { padding: 32px 20px; }
   .arrow { display: none; }
-}
-
-@media (max-width: 900px) and (orientation: portrait) {
-  .inner { grid-template-columns: minmax(0, 1fr); }
-  .imageColumn { display: none; }
+  .mobileBar { padding-inline: 1rem; }
+  :global(#writing) { margin-top: 2.5rem; }
 }

@@ -1,0 +1,128 @@
+.wrap {
+  position: relative;
+  width: min(330px, 78vw);
+  aspect-ratio: 1 / 1.12;
+  margin-inline: auto;
+}
+
+.glow {
+  position: absolute;
+  inset: -12%;
+  border-radius: 0;
+  background: radial-gradient(
+    circle at 35% 30%,
+    var(--accent) 0%,
+    var(--accent-soft) 45%,
+    transparent 70%
+  );
+  filter: blur(38px);
+  opacity: 0.45;
+  transform: scale(0.92) rotate(0deg);
+  transition:
+    opacity 550ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 550ms cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+}
+
+.glowActive,
+.wrap:has(.frame:focus-visible) .glow {
+  opacity: 0.8;
+  transform: scale(1.08) rotate(6deg);
+}
+
+.frame {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 2px;
+  padding: 0;
+  overflow: hidden;
+  cursor: pointer;
+  background: var(--surface);
+  box-shadow: 12px 12px 0 #dededb;
+  transition: transform 550ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.frameActive,
+.frame:focus-visible {
+  transform: scale(1.03) rotate(-1.5deg);
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(1) contrast(1.05) brightness(0.98);
+  transition: filter 550ms ease;
+}
+
+.frameActive .image,
+.frame:focus-visible .image {
+  filter: grayscale(0) contrast(1) brightness(1);
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.9rem;
+  font-family: var(--font-mono);
+}
+
+.arrow {
+  display: grid;
+  place-items: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  transition: background 180ms ease, color 180ms ease;
+}
+
+.arrow:hover {
+  color: var(--accent-contrast);
+  background: var(--accent);
+}
+
+.dots {
+  display: flex;
+  gap: 0.45rem;
+}
+
+.dot {
+  width: 1.4rem;
+  height: 1.4rem;
+  padding: 0.48rem;
+  background-clip: content-box;
+  border: 1px solid var(--foreground-muted);
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+}
+
+.dotActive {
+  border-color: var(--foreground);
+  background: var(--foreground);
+}
+
+@media (max-width: 620px) {
+  .wrap {
+    width: min(220px, 62vw);
+  }
+
+  .frame {
+    box-shadow: 8px 8px 0 #dededb;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glow,
+  .frame,
+  .image {
+    transition: none;
+  }
+}

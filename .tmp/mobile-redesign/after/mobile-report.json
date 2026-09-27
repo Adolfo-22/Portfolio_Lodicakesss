@@ -1,0 +1,239 @@
+{
+  "report": [
+    {
+      "width": 320,
+      "layout": {
+        "width": 320,
+        "documentWidth": 320,
+        "offenders": [],
+        "header": {
+          "x": 0,
+          "y": 0,
+          "width": 320,
+          "height": 77
+        },
+        "image": {
+          "x": 57.59375,
+          "y": 105,
+          "width": 204.796875,
+          "height": 229.359375
+        },
+        "heading": {
+          "x": 20,
+          "y": 456.28125,
+          "width": 212.328125,
+          "height": 126.71875
+        }
+      },
+      "navigation": "6 anchors, close, Escape, backdrop, focus trap, scroll restoration passed",
+      "carousel": "next, previous, direct selection passed",
+      "theme": "light/dark/light passed"
+    },
+    {
+      "width": 375,
+      "layout": {
+        "width": 375,
+        "documentWidth": 375,
+        "offenders": [],
+        "header": {
+          "x": 0,
+          "y": 0,
+          "width": 375,
+          "height": 77
+        },
+        "image": {
+          "x": 67.5,
+          "y": 105,
+          "width": 240,
+          "height": 268.796875
+        },
+        "heading": {
+          "x": 20,
+          "y": 495.71875,
+          "width": 248.828125,
+          "height": 148.5
+        }
+      },
+      "navigation": "6 anchors, close, Escape, backdrop, focus trap, scroll restoration passed",
+      "carousel": "next, previous, direct selection passed",
+      "theme": "light/dark/light passed"
+    },
+    {
+      "width": 390,
+      "layout": {
+        "width": 390,
+        "documentWidth": 390,
+        "offenders": [],
+        "header": {
+          "x": 0,
+          "y": 0,
+          "width": 390,
+          "height": 77
+        },
+        "image": {
+          "x": 70.203125,
+          "y": 105,
+          "width": 249.59375,
+          "height": 279.53125
+        },
+        "heading": {
+          "x": 20,
+          "y": 506.453125,
+          "width": 258.78125,
+          "height": 154.40625
+        }
+      },
+      "navigation": "6 anchors, close, Escape, backdrop, focus trap, scroll restoration passed",
+      "carousel": "next, previous, direct selection passed",
+      "theme": "light/dark/light passed"
+    },
+    {
+      "width": 430,
+      "layout": {
+        "width": 430,
+        "documentWidth": 430,
+        "offenders": [],
+        "header": {
+          "x": 0,
+          "y": 0,
+          "width": 430,
+          "height": 77
+        },
+        "image": {
+          "x": 77.40625,
+          "y": 105,
+          "width": 275.1875,
+          "height": 308.203125
+        },
+        "heading": {
+          "x": 20,
+          "y": 535.125,
+          "width": 285.328125,
+          "height": 170.25
+        }
+      },
+      "navigation": "6 anchors, close, Escape, backdrop, focus trap, scroll restoration passed",
+      "carousel": "next, previous, direct selection passed",
+      "theme": "light/dark/light passed"
+    },
+    {
+      "width": 620,
+      "layout": {
+        "width": 620,
+        "documentWidth": 620,
+        "offenders": [],
+        "header": {
+          "x": 0,
+          "y": 0,
+          "width": 620,
+          "height": 77
+        },
+        "image": {
+          "x": 170,
+          "y": 105,
+          "width": 280,
+          "height": 313.59375
+        },
+        "heading": {
+          "x": 70,
+          "y": 540.515625,
+          "width": 337.796875,
+          "height": 201.59375
+        }
+      },
+      "navigation": "6 anchors, close, Escape, backdrop, focus trap, scroll restoration passed",
+      "carousel": "next, previous, direct selection passed",
+      "theme": "light/dark/light passed"
+    },
+    {
+      "width": 621,
+      "layout": {
+        "width": 621,
+        "documentWidth": 621,
+        "offenders": [],
+        "header": {
+          "x": 0,
+          "y": 0,
+          "width": 621,
+          "height": 77
+        },
+        "image": {
+          "x": 32,
+          "y": 213.796875,
+          "width": 235.859375,
+          "height": 264.15625
+        },
+        "heading": {
+          "x": 300.6875,
+          "y": 158.921875,
+          "width": 177.921875,
+          "height": 103.8125
+        }
+      },
+      "navigation": "6 anchors, close, Escape, backdrop, focus trap, scroll restoration passed",
+      "carousel": "next, previous, direct selection passed",
+      "theme": "light/dark/light passed"
+    },
+    {
+      "width": 768,
+      "layout": {
+        "width": 768,
+        "documentWidth": 768,
+        "offenders": [],
+        "header": {
+          "x": 0,
+          "y": 0,
+          "width": 768,
+          "height": 77
+        },
+        "image": {
+          "x": 42.34375,
+          "y": 163.09375,
+          "width": 280,
+          "height": 313.59375
+        },
+        "heading": {
+          "x": 371.40625,
+          "y": 158.921875,
+          "width": 220.0625,
+          "height": 128.375
+        }
+      },
+      "navigation": "6 anchors, close, Escape, backdrop, focus trap, scroll restoration passed",
+      "carousel": "next, previous, direct selection passed",
+      "theme": "light/dark/light passed"
+    },
+    {
+      "width": 900,
+      "layout": {
+        "width": 900,
+        "documentWidth": 900,
+        "offenders": [],
+        "header": {
+          "x": 0,
+          "y": 0,
+          "width": 900,
+          "height": 77
+        },
+        "image": {
+          "x": 80.09375,
+          "y": 174.140625,
+          "width": 280,
+          "height": 313.59375
+        },
+        "heading": {
+          "x": 436.203125,
+          "y": 158.921875,
+          "width": 257.875,
+          "height": 150.46875
+        }
+      },
+      "navigation": "6 anchors, close, Escape, backdrop, focus trap, scroll restoration passed",
+      "carousel": "next, previous, direct selection passed",
+      "theme": "light/dark/light passed"
+    }
+  ],
+  "errors": [],
+  "resize": "passed",
+  "animations": "passed"
+}

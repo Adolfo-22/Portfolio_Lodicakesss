@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 760" role="img" aria-labelledby="title desc">
+  <title id="title">Placeholder portrait</title>
+  <desc id="desc">Temporary placeholder avatar until a real photo is added.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6d5efc" />
+      <stop offset="55%" stop-color="#4f3ff0" />
+      <stop offset="100%" stop-color="#22d3c7" />
+    </linearGradient>
+    <linearGradient id="ring" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.55" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.08" />
+    </linearGradient>
+  </defs>
+
+  <rect width="600" height="760" rx="28" fill="url(#bg)" />
+
+  <g opacity="0.5" stroke="#ffffff" stroke-width="1.5" fill="none">
+    <circle cx="300" cy="300" r="220" />
+    <circle cx="300" cy="300" r="170" />
+  </g>
+
+  <circle cx="300" cy="300" r="150" fill="url(#ring)" />
+
+  <text
+    x="300"
+    y="330"
+    text-anchor="middle"
+    font-family="'Geist Mono', 'Courier New', monospace"
+    font-size="150"
+    font-weight="700"
+    fill="#ffffff"
+  >PA</text>
+
+  <g font-family="'Geist Mono', 'Courier New', monospace" fill="#ffffff" opacity="0.85">
+    <text x="60" y="620" font-size="26">&lt;/&gt;</text>
+    <text x="60" y="660" font-size="18" opacity="0.75">Proilan M. Adolfo</text>
+    <text x="60" y="690" font-size="15" opacity="0.6">photo coming soon</text>
+  </g>
+</svg>

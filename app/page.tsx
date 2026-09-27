@@ -15,14 +15,16 @@ const navigation = [
   ["contact", "contact"],
 ] as const;
 
-// First dark frame in /Theme/video.mp4, verified at 3.208333 seconds.
+// Both video versions retain the first dark frame at 3.208333 seconds.
 const THEME_SWITCH_TIME = 3.208333;
+const THEME_FRAME_DURATION = 1 / 24;
 
 export default function Home() {
   const [darkMode, setDarkMode] = useState(false);
   const [selectedDarkMode, setSelectedDarkMode] = useState(false);
   const [activeSection, setActiveSection] = useState<string | null>(null);
   const themeVideoRef = useRef<HTMLVideoElement>(null);
+  const themeCanvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     document.documentElement.dataset.theme = darkMode ? "dark" : "light";
@@ -33,6 +35,8 @@ export default function Home() {
   useEffect(() => {
     const video = themeVideoRef.current;
     if (!video) return;
+    const canvas = themeCanvasRef.current;
+    const context = canvas?.getContext("2d");
     let lastFrameDark: boolean | null = null;
 
     const syncTheme = (mediaTime: number) => {
@@ -44,27 +48,51 @@ export default function Home() {
       setDarkMode(frameDark);
     };
 
+    // Keep the last decoded frame on screen while mobile browsers buffer or
+    // seek. The native video surface can briefly clear during those operations.
+    const presentFrame = (mediaTime: number) => {
+      if (video.readyState < HTMLMediaElement.HAVE_CURRENT_DATA || video.seeking) return;
+      if (canvas && context) context.drawImage(video, 0, 0, canvas.width, canvas.height);
+      syncTheme(mediaTime);
+    };
+    const syncCurrentFrame = () => presentFrame(video.currentTime);
+    video.addEventListener("loadeddata", syncCurrentFrame);
+    video.addEventListener("seeked", syncCurrentFrame);
+    syncCurrentFrame();
+
+    let frameCallback = 0;
+    let animationFrame = 0;
+    const hasVideoFrames = typeof video.requestVideoFrameCallback === "function";
     if (typeof video.requestVideoFrameCallback === "function") {
-      let frameCallback = 0;
       const onVideoFrame: VideoFrameRequestCallback = (_now, metadata) => {
-        syncTheme(metadata.mediaTime);
+        presentFrame(metadata.mediaTime);
         frameCallback = video.requestVideoFrameCallback(onVideoFrame);
       };
       frameCallback = video.requestVideoFrameCallback(onVideoFrame);
-      return () => video.cancelVideoFrameCallback(frameCallback);
     }
 
-    // Older browsers can still follow playback and completed reverse seeks.
-    const syncCurrentFrame = () => {
-      if (!video.seeking) syncTheme(video.currentTime);
+    // timeupdate alone is too infrequent for smooth rendering on older WebKit.
+    const animatePlayback = () => {
+      syncCurrentFrame();
+      if (!video.paused && !video.ended) animationFrame = requestAnimationFrame(animatePlayback);
     };
-    video.addEventListener("loadeddata", syncCurrentFrame);
-    video.addEventListener("timeupdate", syncCurrentFrame);
-    video.addEventListener("seeked", syncCurrentFrame);
+    const onPlay = () => {
+      if (hasVideoFrames) return;
+      cancelAnimationFrame(animationFrame);
+      animationFrame = requestAnimationFrame(animatePlayback);
+    };
+    video.addEventListener("play", onPlay);
+    video.addEventListener("pause", syncCurrentFrame);
+    video.addEventListener("ended", syncCurrentFrame);
+    if (!video.paused) onPlay();
     return () => {
+      if (hasVideoFrames) video.cancelVideoFrameCallback(frameCallback);
+      cancelAnimationFrame(animationFrame);
       video.removeEventListener("loadeddata", syncCurrentFrame);
-      video.removeEventListener("timeupdate", syncCurrentFrame);
       video.removeEventListener("seeked", syncCurrentFrame);
+      video.removeEventListener("play", onPlay);
+      video.removeEventListener("pause", syncCurrentFrame);
+      video.removeEventListener("ended", syncCurrentFrame);
     };
   }, []);
 
@@ -81,14 +109,15 @@ export default function Home() {
     const animateFrames = (direction: 1 | -1) => {
       const start = video.currentTime;
       const startedAt = performance.now();
+      const lastFrameTime = Math.max(0, video.duration - THEME_FRAME_DURATION);
 
       const advance = (timestamp: number) => {
         if (cancelled) return;
         const elapsed = (timestamp - startedAt) / 1000;
-        const target = Math.min(video.duration, Math.max(0, start + direction * elapsed));
-        const reachedEnd = direction === 1 ? target === video.duration : target === 0;
+        const target = Math.min(lastFrameTime, Math.max(0, start + direction * elapsed));
+        const reachedEnd = direction === 1 ? target === lastFrameTime : target === 0;
 
-        if (!video.seeking && (Math.abs(video.currentTime - target) >= 1 / 30 || reachedEnd)) {
+        if (!video.seeking && (Math.abs(video.currentTime - target) >= THEME_FRAME_DURATION || reachedEnd)) {
           video.currentTime = target;
           if (reachedEnd) return;
         }
@@ -103,7 +132,9 @@ export default function Home() {
       video.pause();
 
       if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-        video.currentTime = selectedDarkMode ? duration : 0;
+        // Seeking to duration can restore the poster in WebKit. Stay on the
+        // final decodable frame instead of seeking beyond the last frame.
+        video.currentTime = selectedDarkMode ? Math.max(0, duration - THEME_FRAME_DURATION) : 0;
       } else if (selectedDarkMode && video.currentTime < duration) {
         video.playbackRate = 1;
         void video.play().catch(() => {
@@ -193,12 +224,13 @@ export default function Home() {
           <span className="theme-toggle-preview" aria-hidden="true">
             <video
               ref={themeVideoRef}
-              src="/Theme/video.mp4"
+              src="/Theme/video-preview.mp4"
               poster="/Theme/day-poster.webp"
               muted
               playsInline
               preload="auto"
             />
+            <canvas ref={themeCanvasRef} width={512} height={512} />
           </span>
           <span className="theme-toggle-controls" aria-hidden="true">
             <span className="theme-toggle-thumb" />

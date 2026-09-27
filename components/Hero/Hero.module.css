@@ -211,8 +211,8 @@
   .postMenu { letter-spacing: 0; }
   .postGallery { grid-template-columns: 1fr; }
   .galleryMain { min-height: 280px; }
-  .gallerySide { min-height: 300px; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; }
-  .galleryThumb { min-height: 145px; }
+  .gallerySide { min-height: 0; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: 1fr; }
+  .galleryThumb { min-height: 0; aspect-ratio: 1; }
   .postActions { gap: 0; padding-inline: 4px; }
   .postActions button { padding-inline: 4px; font-size: 0.75rem; }
   .carouselDots { gap: 4px; }

@@ -49,6 +49,23 @@ export type BlogPost = {
 
 export const blogPosts: BlogPost[] = [
   {
+    id: "bictc-promptpulse-2026",
+    title: "PromptPulse at BICTC 2026",
+    date: "September 24, 2026 · competition",
+    demoReactions: { like: 28, love: 19, celebrate: 25 },
+    caption:
+      "On September 24, 2026, I joined PromptPulse at the Bukidnon Inter-Campus Technology Competition (BICTC), where we earned 1st and 2nd runner-up finishes. It was a chance to put our ideas to the test, learn from one another, and share the experience with students from other campuses. Grateful to my teammates and everyone who supported us. The medals and plaques are special, but celebrating this moment together made it even more memorable.",
+    mainImage: {
+      src: "/blog/prompt3.jpg",
+      alt: "The group celebrating with medals and plaques after BICTC 2026",
+    },
+    thumbImages: [
+      { src: "/blog/prompt.jpg", alt: "A group selfie showing medals and awards after the competition" },
+      { src: "/blog/prompt1.jpg", alt: "PromptPulse participants posing together with their awards" },
+      { src: "/blog/prompt2.jpg", alt: "The group holding their medals and a PromptPulse runner-up plaque" },
+    ],
+  },
+  {
     id: "capstone-defense",
     title: "Capstone 2 Defended",
     date: "November 2026 · milestone",

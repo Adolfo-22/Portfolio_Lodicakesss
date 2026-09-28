@@ -1,14 +1,15 @@
 "use client";
 
 import { startTransition, useCallback, useEffect, useRef, useState } from "react";
-import { blogPosts, certifications, profile, strategies, techStack } from "@/data/profile";
+import { blogPosts, certifications, profile, strategies } from "@/data/profile";
 import Image from "next/image";
 import PrivatePostButton from "./PrivatePostButton";
 import { LockKeyhole, Heart, MessageCircle, Send } from "lucide-react";
 import ProfileImage from "./ProfileImage";
 import PostReactions from "./PostReactions";
-import TechBadge from "./TechBadge";
+import ResumePreview from "@/components/ResumePreview";
 import CertificateViewer from "./CertificateViewer";
+import ContactForm from "./ContactForm";
 import styles from "./Hero.module.css";
 
 const carouselPosts = [
@@ -128,9 +129,9 @@ export default function Hero() {
         <div className={styles.inner}>
           <div className={styles.imageColumn}><ProfileImage src={profile.avatar} name={profile.name} /></div>
           <div className={styles.content}>
-            <p className={styles.kicker}>full-stack engineer · student</p>
+            <p className={styles.kicker}>software developer · student</p>
             <h1 className={styles.heading}>proilan<br />adolfo</h1>
-            <p className={styles.lede}>I&apos;m a full-stack engineer who builds modern web and mobile applications, with a growing focus on generative AI.</p>
+            <p className={styles.lede}>I&apos;m a software developer who builds modern web and mobile applications using AI-assisted development to turn ideas into practical solutions.</p>
             <p className={styles.bio}>I enjoy turning early-stage ideas into practical, user-friendly products. Whether I&apos;m building from scratch or improving an existing system, my goal is to create technology that people can genuinely use and value.</p>
             <div className={styles.ctas}><a href="#contact" className={styles.primaryBtn}>let&apos;s talk <span>↗</span></a><a href="#projects" className={styles.secondaryBtn}>view projects <span>↓</span></a></div>
           </div>
@@ -210,8 +211,15 @@ export default function Hero() {
           <div><span className={styles.date}>{certificate.kind}</span><h3>{certificate.title}</h3><p className={styles.certificateIssuer}>{certificate.issuer}</p><p>{certificate.description}</p>{certificate.date && <p className={styles.certificateDate}>{certificate.date}</p>}<CertificateViewer certificate={certificate} /></div>
         </article>)}</div>
       </section>
-      <section id="stack" className={styles.stackSection}><div className={styles.sectionHead}><span>04 — stack</span><span id="education">tools i reach for</span></div><ul className={styles.badges}>{techStack.map((tech) => <TechBadge key={tech.label} {...tech} />)}</ul></section>
-      <footer id="contact" className={styles.footer}><span>have an idea?</span><a href="mailto:proilan@example.com">proilan@example.com ↗</a></footer>
+      <section id="contact" className={`${styles.section} ${styles.contactSection}`} aria-labelledby="contact-title">
+        <div className={styles.sectionHead}><span>05 — contact</span><span>let’s start a conversation</span></div>
+        <div className={styles.contactGrid}>
+          <div><h2 id="contact-title" className={styles.contactTitle}>Get in touch<span>.</span></h2><p className={styles.contactIntro}>Have a project in mind, an opportunity to share, or just want to say hello? I’d love to hear from you.</p><p className={styles.contactNote}>Let’s talk about web and mobile development, collaborate on an idea, or explore what we can build together.</p><div className={styles.contactActions}><a className={styles.primaryBtn} href={`mailto:${profile.email}`}>Send an email <span>↗</span></a><ResumePreview label="View my resume" className={styles.contactResume} /></div></div>
+          <dl className={styles.contactDetails}><div><dt>Email</dt><dd><a href={`mailto:${profile.email}`}>{profile.email} ↗</a></dd></div><div><dt>Phone</dt><dd><a href={profile.phone.href}>{profile.phone.label}</a></dd></div><div><dt>Based in</dt><dd>{profile.location}</dd></div></dl>
+        </div>
+        <ContactForm />
+        <p className={styles.contactSignoff}>Thanks for stopping by. — {profile.displayName}</p>
+      </section>
     </div>
   );
 }

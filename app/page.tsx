@@ -1,9 +1,12 @@
 "use client";
 
+import ResumePreview from "@/components/ResumePreview";
+import SidebarTechStack from "@/components/SidebarTechStack";
+
 import { useEffect, useRef, useState } from "react";
 import Hero from "@/components/Hero/Hero";
 import MobileNavigation from "@/components/MobileNavigation";
-import { FileText, Mail, Moon, Sun } from "lucide-react";
+import { Mail, Moon, Sun } from "lucide-react";
 import { FaDiscord, FaFacebook, FaGithub, FaLinkedin, FaYoutube } from "react-icons/fa6";
 
 const navigation = [
@@ -11,7 +14,6 @@ const navigation = [
   ["writing", "blog"],
   ["projects", "projects"],
   ["experience", "experience"],
-  ["education", "education"],
   ["contact", "contact"],
 ] as const;
 
@@ -185,8 +187,8 @@ export default function Home() {
         <a href="https://discord.com/" target="_blank" rel="noreferrer" aria-label="Discord" data-tooltip="Discord"><FaDiscord /></a>
         <a href="https://youtube.com/" target="_blank" rel="noreferrer" aria-label="YouTube" data-tooltip="YouTube"><FaYoutube /></a>
         <a href="https://www.facebook.com/halapitankkofficial" target="_blank" rel="noreferrer" aria-label="Facebook" data-tooltip="Facebook"><FaFacebook /></a>
-        <a href="mailto:proilan@example.com" aria-label="Email" data-tooltip="Email"><Mail /></a>
-        <a href="/resume/Adolfo_Resume.pdf" target="_blank" rel="noopener noreferrer" aria-label="Resume (opens in a new tab)" data-tooltip="Resume"><FileText /></a>
+        <a href="mailto:adolfoproilan@gmail.com" aria-label="Email" data-tooltip="Email"><Mail /></a>
+        <ResumePreview />
       </aside>
       <aside className="sidebar">
         <a className="brand" href="#home" aria-label="Back to home">
@@ -205,6 +207,7 @@ export default function Home() {
             </a>
           ))}
         </nav>
+        <SidebarTechStack />
       </aside>
       <MobileNavigation
         navigation={navigation}

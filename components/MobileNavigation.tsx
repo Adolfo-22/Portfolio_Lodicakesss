@@ -1,7 +1,9 @@
 "use client";
 
+import ResumePreview from "@/components/ResumePreview";
+
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { FileText, Mail, Moon, Sun, X } from "lucide-react";
+import { Mail, Moon, Sun, X } from "lucide-react";
 import { profile } from "@/data/profile";
 import { FaDiscord, FaFacebook, FaGithub, FaLinkedin, FaYoutube } from "react-icons/fa6";
 
@@ -183,8 +185,8 @@ export default function MobileNavigation({ children, navigation, activeSection, 
           <a href="https://discord.com/" target="_blank" rel="noreferrer" aria-label="Discord"><FaDiscord /></a>
           <a href="https://youtube.com/" target="_blank" rel="noreferrer" aria-label="YouTube"><FaYoutube /></a>
           <a href="https://facebook.com/" target="_blank" rel="noreferrer" aria-label="Facebook"><FaFacebook /></a>
-          <a href="mailto:proilan@example.com" aria-label="Email"><Mail /></a>
-          <a href="/resume/Adolfo_Resume.pdf" target="_blank" rel="noopener noreferrer" aria-label="Resume (opens in a new tab)"><FileText /></a>
+          <a href={`mailto:${profile.email}`} aria-label="Email"><Mail /></a>
+          <ResumePreview />
         </nav>
       </dialog>
     </>

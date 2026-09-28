@@ -14,6 +14,8 @@ To change the password, provide `GALLERY_NEW_PASSWORD` (at least 6 characters) a
 
 ## Getting Started
 
+The Contact message form uses FormSubmit AJAX to send submissions to `adolfoproilan@gmail.com`. Activate it through FormSubmit's confirmation email before using it publicly. Visitors stay on the portfolio while sending; failed submissions retain the typed message and offer a direct email link. No email API key is stored in the website.
+
 First, run the development server:
 
 ```bash

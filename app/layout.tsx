@@ -14,6 +14,11 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Proilan M. Adolfo — Portfolio",
+  appleWebApp: {
+    capable: true,
+    title: "Proilan",
+    statusBarStyle: "default",
+  },
   description:
     "Portfolio of Proilan M. Adolfo, BSIT 4th Year student at Bukidnon State University.",
 };

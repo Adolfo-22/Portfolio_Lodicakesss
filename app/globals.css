@@ -86,11 +86,11 @@ button {
   box-shadow: 12px 0 28px rgba(20, 20, 20, 0.08);
 }
 .icon-sidebar { position: fixed; inset: 0 auto 0 0; z-index: 4; width: 48px; padding: 1.35rem 0; border-right: 1px solid var(--border); background: color-mix(in srgb, var(--background) 96%, transparent); display: grid; align-content: start; justify-items: center; gap: 0.55rem; }
-.icon-sidebar a { position: relative; display: grid; place-items: center; width: 2rem; height: 2.1rem; color: var(--foreground-muted); transition: color 180ms ease, background 180ms ease, transform 180ms ease; }
+.icon-sidebar :is(a, .resume-trigger) { position: relative; display: grid; place-items: center; width: 2rem; height: 2.1rem; color: var(--foreground-muted); transition: color 180ms ease, background 180ms ease, transform 180ms ease; }
 .icon-sidebar svg { width: 1.05rem; height: 1.05rem; stroke-width: 1.8; }
-.icon-sidebar a:hover { color: var(--foreground); background: var(--surface); transform: translateX(2px); }
-.icon-sidebar a::after { content: attr(data-tooltip); position: absolute; left: calc(100% + 0.65rem); top: 50%; padding: 0.35rem 0.5rem; border: 1px solid var(--border); background: var(--background); color: var(--foreground); font: 0.62rem var(--font-mono); white-space: nowrap; opacity: 0; pointer-events: none; transform: translateY(-50%) translateX(-4px); transition: opacity 160ms ease, transform 160ms ease; }
-.icon-sidebar a:hover::after, .icon-sidebar a:focus-visible::after { opacity: 1; transform: translateY(-50%) translateX(0); }
+.icon-sidebar :is(a, .resume-trigger):hover { color: var(--foreground); background: var(--surface); transform: translateX(2px); }
+.icon-sidebar :is(a, .resume-trigger)::after { content: attr(data-tooltip); position: absolute; left: calc(100% + 0.65rem); top: 50%; padding: 0.35rem 0.5rem; border: 1px solid var(--border); background: var(--background); color: var(--foreground); font: 0.62rem var(--font-mono); white-space: nowrap; opacity: 0; pointer-events: none; transform: translateY(-50%) translateX(-4px); transition: opacity 160ms ease, transform 160ms ease; }
+.icon-sidebar :is(a, .resume-trigger):hover::after, .icon-sidebar :is(a, .resume-trigger):focus-visible::after { opacity: 1; transform: translateY(-50%) translateX(0); }
 
 /* Small circular orbits keep the icons upright and their link targets steady. */
 @keyframes sidebar-icon-orbit {
@@ -98,17 +98,17 @@ button {
   to { transform: rotate(360deg) translateY(-4px) rotate(-360deg); }
 }
 @media (min-width: 901px) and (prefers-reduced-motion: no-preference) {
-  .icon-sidebar a svg { animation: sidebar-icon-orbit 5.6s linear infinite; }
-  .icon-sidebar a:nth-child(2) svg { animation-delay: -0.8s; }
-  .icon-sidebar a:nth-child(3) svg { animation-delay: -1.6s; }
-  .icon-sidebar a:nth-child(4) svg { animation-delay: -2.4s; }
-  .icon-sidebar a:nth-child(5) svg { animation-delay: -3.2s; }
-  .icon-sidebar a:nth-child(6) svg { animation-delay: -4s; }
-  .icon-sidebar a:nth-child(7) svg { animation-delay: -4.8s; }
+  .icon-sidebar :is(a, .resume-trigger) svg { animation: sidebar-icon-orbit 5.6s linear infinite; }
+  .icon-sidebar :is(a, .resume-trigger):nth-child(2) svg { animation-delay: -0.8s; }
+  .icon-sidebar :is(a, .resume-trigger):nth-child(3) svg { animation-delay: -1.6s; }
+  .icon-sidebar :is(a, .resume-trigger):nth-child(4) svg { animation-delay: -2.4s; }
+  .icon-sidebar :is(a, .resume-trigger):nth-child(5) svg { animation-delay: -3.2s; }
+  .icon-sidebar :is(a, .resume-trigger):nth-child(6) svg { animation-delay: -4s; }
+  .icon-sidebar :is(a, .resume-trigger):nth-child(7) svg { animation-delay: -4.8s; }
   .icon-sidebar:hover a svg,
   .icon-sidebar:focus-within a svg { animation-play-state: paused; }
 }
-.icon-sidebar a:focus-visible { outline: 2px solid var(--foreground); outline-offset: 2px; border-radius: 4px; }
+.icon-sidebar :is(a, .resume-trigger):focus-visible { outline: 2px solid var(--foreground); outline-offset: 2px; border-radius: 4px; }
 
 .brand {
   display: flex;
@@ -350,9 +350,9 @@ img {
   .mobile-menu-arrow { margin-left: auto; color: var(--foreground-muted); }
   .mobile-menu-links a:hover, .mobile-menu-links a[aria-current="location"] { background: var(--surface); }
   .mobile-menu-links a[aria-current="location"] { font-weight: 700; }
-  .mobile-menu-socials { display: flex; flex-wrap: wrap; gap: 4px; margin-top: auto; padding-top: 20px; border-top: 1px solid var(--border); }
-  .mobile-menu-socials a { display: grid; place-items: center; width: 44px; height: 44px; color: var(--foreground-muted); }
-  .mobile-menu-socials a:hover { background: var(--surface); color: var(--foreground); }
+  .mobile-menu-socials { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 0; margin-top: auto; padding-top: 20px; border-top: 1px solid var(--border); }
+  .mobile-menu-socials :is(a, .resume-trigger) { display: grid; place-items: center; width: 100%; min-width: 0; height: 44px; color: var(--foreground-muted); }
+  .mobile-menu-socials :is(a, .resume-trigger):hover { background: var(--surface); color: var(--foreground); }
   .mobile-menu-socials svg { width: 18px; height: 18px; }
 
   @media (min-width: 621px) {
@@ -376,4 +376,12 @@ img {
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+.resume-trigger { padding: 0; border: 0; background: transparent; font: inherit; cursor: pointer; }
+
+@media (min-width: 901px) {
+  .sidebar { overflow-y: auto; scrollbar-width: none; padding-bottom: calc(clamp(112px, 24vh, 164px) + 36px); }
+  .sidebar::-webkit-scrollbar { display: none; width: 0; height: 0; }
+  .sidebar > * { flex-shrink: 0; }
 }

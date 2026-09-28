@@ -1,0 +1,17 @@
+.overlay { position: fixed; inset: 0; z-index: 10000; display: grid; place-items: center; padding: 24px; background: var(--background, #fff); color: var(--foreground, #171719); pointer-events: none; animation: dismiss .8s cubic-bezier(.22, 1, .36, 1) 5s forwards; }
+.content { display: flex; flex-direction: column; align-items: center; text-align: center; animation: arrive .5s ease both; }
+.portrait { position: relative; width: 80px; height: 80px; margin-bottom: 32px; }
+.portrait img { display: block; border-radius: 22px; }
+.ring { position: absolute; inset: -7px; border: 1px solid var(--border); border-top-color: var(--foreground); border-radius: 28px; animation: orbit 1.4s linear infinite; }
+.eyebrow { font: 9px var(--font-mono); letter-spacing: .2em; color: var(--foreground-muted); }
+.name { margin: 14px 0 10px; font-size: clamp(30px, 7vw, 48px); line-height: 1.1; font-weight: 750; letter-spacing: -.06em; }
+.name span { color: #a56b65; }
+.subtitle { color: var(--foreground-muted); font-size: 12px; }
+.track { width: 100px; height: 2px; margin-top: 28px; background: var(--border); overflow: hidden; border-radius: 2px; }
+.track span { display: block; width: 40%; height: 100%; background: var(--foreground); animation: glide 1s ease-in-out infinite; }
+@keyframes arrive { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes orbit { to { transform: rotate(360deg); } }
+@keyframes glide { from { transform: translateX(-100%); } to { transform: translateX(350%); } }
+/* CSS also dismisses the overlay if JavaScript is unavailable. */
+@keyframes dismiss { from { opacity: 1; visibility: visible; } to { opacity: 0; visibility: hidden; } }
+@media (prefers-reduced-motion: reduce) { .overlay { animation-duration: .15s; animation-delay: 0s; } .content, .ring, .track span { animation: none; } }

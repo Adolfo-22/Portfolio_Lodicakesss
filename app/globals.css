@@ -380,6 +380,17 @@ img {
 
 .resume-trigger { padding: 0; border: 0; background: transparent; font: inherit; cursor: pointer; }
 
+.page-entry { flex: 1; min-width: 0; animation: page-reveal .9s cubic-bezier(.22, 1, .36, 1) 5s backwards; }
+.page-entry #home > div { animation: content-arrive .9s cubic-bezier(.22, 1, .36, 1) 5s backwards; }
+@keyframes page-reveal { from { opacity: 0; } to { opacity: 1; } }
+@keyframes content-arrive { from { transform: translateY(16px); } to { transform: translateY(0); } }
+@media (max-width: 900px) {
+  @keyframes content-arrive { from { transform: translateY(8px); } to { transform: translateY(0); } }
+}
+@media (prefers-reduced-motion: reduce) {
+  .page-entry, .page-entry #home > div { animation: none; }
+}
+
 @media (min-width: 901px) {
   .sidebar { overflow-y: auto; scrollbar-width: none; padding-bottom: calc(clamp(112px, 24vh, 164px) + 36px); }
   .sidebar::-webkit-scrollbar { display: none; width: 0; height: 0; }

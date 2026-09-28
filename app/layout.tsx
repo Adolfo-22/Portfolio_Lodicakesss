@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import VisitorAnalytics from "@/components/VisitorAnalytics";
+import WelcomeLoader from "@/components/WelcomeLoader";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,7 +28,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
-      <body>{children}{process.env.VERCEL_ENV === "production" && <VisitorAnalytics />}</body>
+      <body><WelcomeLoader /><div className="page-entry">{children}</div>{process.env.VERCEL_ENV === "production" && <VisitorAnalytics />}</body>
     </html>
   );
 }

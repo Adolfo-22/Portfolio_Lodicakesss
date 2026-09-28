@@ -44,7 +44,7 @@ export default function PrivatePostButton({ onOpenChange }: { onOpenChange: (ope
   }
   return <>
     <button type="button" className={styles.openPost} onClick={() => { setIsOpen(true); onOpenChange(true); dialog.current?.showModal(); }}><LockKeyhole size={16} aria-hidden="true" /> Open post <span aria-hidden="true">↗</span></button>
-    <dialog ref={dialog} className={`${styles.passwordModal} ${session ? styles.privateGalleryModal : ""}`} aria-label="Just us — private post" onCancel={event => { event.preventDefault(); close(); }} onClick={event => { if (event.target === event.currentTarget) close(); }}>
+    <dialog ref={dialog} className={`${styles.passwordModal} ${session ? styles.privateGalleryModal : ""}`} aria-label="Just us — private post" onCancel={event => { if (event.target !== event.currentTarget) return; event.preventDefault(); close(); }} onClick={event => { if (event.target === event.currentTarget) close(); }}>
       {session ? <div className={styles.privateGalleryContent}><header className={styles.privateGalleryHeader}><span>Just us · private album</span><button type="button" onClick={close} aria-label="Close private post"><X size={22} /></button></header><PrivateGallery embedded initialSession={session} /></div> : <div className={styles.passwordPanel}>
         <button type="button" className={styles.passwordClose} aria-label="Close password dialog" onClick={close}><X size={20} /></button>
         <LockKeyhole size={28} aria-hidden="true" />

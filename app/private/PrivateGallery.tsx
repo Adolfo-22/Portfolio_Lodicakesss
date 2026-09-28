@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
+import { createPortal } from 'react-dom';
 import Image from 'next/image';
 import { ArrowLeft, Heart, LockKeyhole, X } from 'lucide-react';
 import styles from './gallery.module.css';
@@ -15,6 +16,13 @@ export default function PrivateGallery({ embedded = false, initialSession = null
   const [error, setError] = useState('');
   const [selected, setSelected] = useState<Photo | null>(null);
   const dialog = useRef<HTMLDialogElement>(null);
+  const photoTrigger = useRef<HTMLButtonElement | null>(null);
+  const [photoStatus, setPhotoStatus] = useState<'loading' | 'ready' | 'error'>('loading');
+  function closePhoto() {
+    dialog.current?.close();
+    setSelected(null);
+    photoTrigger.current?.focus({ preventScroll: true });
+  }
   const requestVersion = useRef(0);
   const checkSession = useCallback(async () => {
     const version = ++requestVersion.current;
@@ -41,7 +49,9 @@ export default function PrivateGallery({ embedded = false, initialSession = null
     return () => window.clearTimeout(timer);
   }, [session]);
   useEffect(() => {
-    if (selected) dialog.current?.showModal(); else dialog.current?.close();
+    const viewer = dialog.current;
+    if (selected) viewer?.showModal();
+    return () => { viewer?.close(); };
   }, [selected]);
   async function unlock(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -67,8 +77,13 @@ export default function PrivateGallery({ embedded = false, initialSession = null
   return <div className={styles.page}>
     <nav className={styles.nav}>{!embedded && <Link href="/"><ArrowLeft size={17} /> Back to portfolio</Link>}{session && <button onClick={lock} disabled={busy}><LockKeyhole size={16} /> Lock album</button>}</nav>
     <header className={styles.heading}><span className={styles.eyebrow}>A LITTLE CORNER FOR US</span><h1>Just us<span>.</span></h1><p>The little moments. The big smiles. Our favorite memories.</p></header>
-    {session ? <><div className={styles.albumLabel}><span><Heart size={16} /> Our moments</span><span>{session.photos.length} photos</span></div><div className={styles.grid}>{session.photos.map((photo, index) => <button className={styles.photo} key={photo.id} onClick={() => setSelected(photo)} aria-label={`Open memory ${index + 1}`}><Image unoptimized src={`/private/photos/${photo.id}?variant=thumb`} alt={`Our memory ${index + 1}`} width={photo.width} height={photo.height} /><span>{String(index + 1).padStart(2, '0')} / a moment to keep</span></button>)}</div></> : <section className={styles.gate} aria-label="Password-protected album"><div className={styles.lock}><LockKeyhole size={28} /></div><h2>A few memories, just for us.</h2><p>This album is private. Enter the password to take a look.</p><form onSubmit={unlock}><label htmlFor="gallery-password">Album password</label><input id="gallery-password" type="password" autoComplete="current-password" required maxLength={256} value={password} onChange={event => setPassword(event.target.value)} placeholder="Enter password" disabled={busy} /><button type="submit" disabled={busy}>{busy ? 'Please wait…' : 'Unlock album'} <Heart size={16} /></button></form>{error && <p role="alert" className={styles.error}>{error}</p>}{error.includes('End session') && <button onClick={lock}>End session</button>}<small><LockKeyhole size={12} /> Password required · Session lasts one hour</small></section>}
-    <dialog ref={dialog} className={styles.viewer} onCancel={() => setSelected(null)} onClick={event => { if (event.target === event.currentTarget) setSelected(null); }}><button autoFocus className={styles.close} onClick={() => setSelected(null)} aria-label="Close photo"><X /></button>{selected && <Image unoptimized src={`/private/photos/${selected.id}`} alt="Our memory, full size" width={selected.width} height={selected.height} />}</dialog>
+    {session ? <><div className={styles.albumLabel}><span><Heart size={16} /> Our moments</span><span>{session.photos.length} photos</span></div><div className={styles.grid}>{session.photos.map((photo, index) => <button className={styles.photo} key={photo.id} onClick={event => { photoTrigger.current = event.currentTarget; setPhotoStatus("loading"); setSelected(photo); }} aria-label={`Open memory ${index + 1}`}><Image unoptimized src={`/private/photos/${photo.id}?variant=thumb`} alt={`Our memory ${index + 1}`} width={photo.width} height={photo.height} /><span>{String(index + 1).padStart(2, '0')} / a moment to keep</span></button>)}</div></> : <section className={styles.gate} aria-label="Password-protected album"><div className={styles.lock}><LockKeyhole size={28} /></div><h2>A few memories, just for us.</h2><p>This album is private. Enter the password to take a look.</p><form onSubmit={unlock}><label htmlFor="gallery-password">Album password</label><input id="gallery-password" type="password" autoComplete="current-password" required maxLength={256} value={password} onChange={event => setPassword(event.target.value)} placeholder="Enter password" disabled={busy} /><button type="submit" disabled={busy}>{busy ? 'Please wait…' : 'Unlock album'} <Heart size={16} /></button></form>{error && <p role="alert" className={styles.error}>{error}</p>}{error.includes('End session') && <button onClick={lock}>End session</button>}<small><LockKeyhole size={12} /> Password required · Session lasts one hour</small></section>}
+    {selected && createPortal(<dialog ref={dialog} className={styles.viewer} aria-label="Full size private photo" onCancel={event => { event.preventDefault(); event.stopPropagation(); closePhoto(); }} onClose={event => event.stopPropagation()} onClick={event => { event.stopPropagation(); if (event.target === event.currentTarget) closePhoto(); }}>
+      <button autoFocus className={styles.close} onClick={closePhoto} aria-label="Close photo"><X /></button>
+      {photoStatus === 'loading' && <p className={styles.photoNotice} role="status">Loading photo…</p>}
+      {photoStatus === 'error' && <p className={styles.photoNotice} role="alert">Couldn’t load this photo. Close it and try again.</p>}
+      <Image unoptimized loading="eager" src={`/private/photos/${selected.id}`} alt="Our memory, full size" width={selected.width} height={selected.height} onLoad={() => setPhotoStatus('ready')} onError={() => setPhotoStatus('error')} />
+    </dialog>, document.body)}
     <footer className={styles.footer}>Small moments. Always worth keeping.</footer>
   </div>;
 }

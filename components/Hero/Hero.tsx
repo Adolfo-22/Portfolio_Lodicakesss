@@ -124,7 +124,7 @@ export default function Hero() {
   };
 
   return (
-    <div className={styles.pageContent}>
+    <div className={`${styles.pageContent} page-entry`}>
       <section id="home" className={styles.hero} aria-label="Introduction">
         <div className={styles.inner}>
           <div className={styles.imageColumn}><ProfileImage src={profile.avatar} name={profile.name} /></div>

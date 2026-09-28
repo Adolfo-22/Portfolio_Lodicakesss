@@ -22,9 +22,11 @@
 .photo { min-width: 0; padding: 9px; border: 1px solid var(--border); background: var(--background); color: var(--foreground-muted); border-radius: 8px; cursor: pointer; text-align: left; }
 .photo img { display: block; width: 100%; height: auto; aspect-ratio: 4/5; object-fit: cover; border-radius: 3px; }
 .photo span { display: block; font: 10px var(--font-mono); padding: 14px 4px 5px; }
-.viewer { position: fixed; inset: 0; margin: auto; max-width: 95vw; max-height: 94dvh; border: 0; padding: 0; background: transparent; overflow: visible; }
+.viewer { position: fixed; inset: 0; margin: auto; width: 100vw; height: 100dvh; max-width: 100vw; max-height: 100dvh; border: 0; padding: max(64px, env(safe-area-inset-top)) 16px max(20px, env(safe-area-inset-bottom)); background: #111; color: white; overflow: hidden; }
+.viewer[open] { display: grid; place-items: center; }
 .viewer::backdrop { background: #000e; }
-.viewer img { display: block; max-width: 95vw; max-height: 88dvh; width: auto; height: auto; object-fit: contain; }
-.close { position: absolute; right: 8px; top: 8px; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; border: 1px solid #ffffff55; background: #171719; color: white; cursor: pointer; }
+.viewer img { display: block; max-width: 100%; max-height: 100%; width: auto; height: auto; min-height: 0; object-fit: contain; }
+.close { position: absolute; z-index: 2; right: max(16px, env(safe-area-inset-right)); top: max(12px, env(safe-area-inset-top)); display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; border: 1px solid #ffffff55; background: #171719; color: white; cursor: pointer; }
+.photoNotice { position: absolute; inset: 50% 24px auto; text-align: center; color: #fff; font-size: 14px; }
 .footer { text-align: center; padding-top: 52px; color: var(--foreground-muted); font-size: 11px; }
 @media (max-width: 620px) { .page { padding: 22px 18px 32px; } .heading { padding-top: 54px; } .heading p { max-width: 270px; margin: auto; } .gate { padding: 28px 22px; } .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; } .photo { padding: 6px; } .photo span { font-size: 8px; } }

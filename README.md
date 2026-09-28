@@ -14,6 +14,8 @@ To change the password, provide `GALLERY_NEW_PASSWORD` (at least 6 characters) a
 
 ## Getting Started
 
+Visitor statistics are available in the Vercel project’s **Analytics** dashboard. Enable Web Analytics for `matig-buk-su/adolfo-proilan`, then deploy. The analytics component runs only on Vercel production deployments; local development and previews are excluded. It records public page visits, strips query strings and hashes, and excludes `/private` routes. Counts begin after setup and may be lower when visitors block analytics. Contact form contents, passwords, and private photos are not sent as analytics events.
+
 The Contact message form uses FormSubmit AJAX to send submissions to `adolfoproilan@gmail.com`. Activate it through FormSubmit's confirmation email before using it publicly. Visitors stay on the portfolio while sending; failed submissions retain the typed message and offer a direct email link. No email API key is stored in the website.
 
 First, run the development server:
